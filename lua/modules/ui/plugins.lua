@@ -101,7 +101,7 @@ local colorscheme_list = {
   },
 
   ['omni.vim'] = {
-    git = 'yonlu/omni.vim',
+    git = 'getomni/neovim',
     packer_config = {
       config = function ()
         vim.cmd [[colorscheme omni]]

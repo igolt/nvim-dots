@@ -4,13 +4,81 @@ function config.dashboard()
   local g = vim.g
   local selected_header = 'vim-enjoyer2'
 
+  g.dashboard_custom_section = {
+    a = {
+      description = {"洛 New File                                SPC n f"},
+      command = "set showtabline=2 | DashboardNewFile",
+    },
+
+    b = {
+      description = {'  Open Personal dotfiles                  SPC f d'},
+      command = 'Telescope vimdots'
+    },
+
+    c = {
+      description = {' Jump to book marks                       SPC f b'},
+      command = 'Telescope marks'
+    },
+
+    d = {
+      description = {'  Recently opened files                   SPC f h'},
+      command =  'DashboardFindHistory'
+    },
+
+    e  = {
+      description = {'  Find File                               SPC f f'},
+      command = 'Telescope find_files'
+    },
+
+    f = {
+      description = {'  Find Word                               SPC f w'},
+      command = 'DashboardFindWord'
+    },
+  }
+
+  vim.cmd [[
+    augroup augroup UserDashboard
+     autocmd FileType dashboard nmap <buffer>l <Cr>
+     autocmd FileType dashboard highlight clear StatusLine
+     autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2
+    augroup END
+  ]]
+
   g.dashboard_disable_statusline = 1
   g.dashboard_disable_at_vimenter = 0
-  g.dashboard_default_executive = "telescope"
-
-  vim.cmd [[autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2 ]]
+  vim.g.dashboard_default_executive = "telescope"
 
   local headers_list = {
+    ['heart_pirates'] = {
+      '               ▄▄██████████▄▄             ',
+      '               ▀▀▀   ██   ▀▀▀             ',
+      '       ▄██▄   ▄▄████████████▄▄   ▄██▄     ',
+      '     ▄███▀  ▄████▀▀▀    ▀▀▀████▄  ▀███▄   ',
+      '    ████▄ ▄███▀              ▀███▄ ▄████  ',
+      '   ███▀█████▀▄████▄      ▄████▄▀█████▀███ ',
+      '   ██▀  ███▀ ██████      ██████ ▀███  ▀██ ',
+      '    ▀  ▄██▀  ▀████▀  ▄▄  ▀████▀  ▀██▄  ▀  ',
+      '       ███           ▀▀           ███     ',
+      '       ██████████████████████████████     ',
+      '   ▄█  ▀██  ███   ██    ██   ███  ██▀  █▄ ',
+      '   ███  ███ ███   ██    ██   ███▄███  ███ ',
+      '   ▀██▄████████   ██    ██   ████████▄██▀ ',
+      '    ▀███▀ ▀████   ██    ██   ████▀ ▀███▀  ',
+      '     ▀███▄  ▀███████    ███████▀  ▄███▀   ',
+      '       ▀███    ▀▀██████████▀▀▀   ███▀     ',
+      '         ▀    ▄▄▄    ██    ▄▄▄    ▀       ',
+      '               ▀████████████▀             ',
+    },
+
+    ['neovim'] = {
+      ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+      ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+      ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+      ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+      ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+      ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+    },
+
     ['so-lazer'] = {
       "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣥⣤⣾⠟⡛⠿⠿⣭⣻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿",
       "⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿⣽⡟⡏⢩⣦⡝⠋⢸⣶⠄⢲⡟⣿⣿⣿⣿⣿⣿⣿⣿",
@@ -210,7 +278,8 @@ function config.nvim_colorizer()
     'css',
     'scss',
     'conf',
-    'dosini'
+    'dosini',
+    'lua',
   }, {
     mode = 'background'
   })
@@ -259,7 +328,13 @@ function config.nvim_tree()
 end
 
 function config.nvim_bufferline()
-  require('bufferline').setup{}
+  require('bufferline').setup {
+    options = {
+      offsets = {
+        {filetype = "NvimTree", text = "NvimTree", padding = 0}
+      }
+    }
+  }
 end
 
 function config.gruvbox()
@@ -289,7 +364,7 @@ function config.lualine()
       theme = 'gruvbox_material',
       component_separators = {'|', '|'},
       section_separators = {'', ''},
-      disabled_filetypes = {'NvimTree'}
+      disabled_filetypes = {'NvimTree', 'dashboard'}
     },
     sections = {
       lualine_a = {'mode'},

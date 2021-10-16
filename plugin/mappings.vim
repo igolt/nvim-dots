@@ -9,9 +9,10 @@ nnoremap Q <Nop>
 nnoremap gp `[v`]
 
 nnoremap <Esc> <Cmd>noh<Cr>
+nnoremap <C-[> <Cmd>noh<Cr>
 nnoremap <leader>w <cmd>w<cr>
 nnoremap <leader>q <cmd>q<cr>
-nnoremap <leader>FQ <cmd>qa<cr>
+nnoremap <leader>fq <cmd>qa<cr>
 nnoremap du 0D
 nnoremap Y y$
 
