@@ -1,0 +1,26 @@
+require'compe'.setup {
+  enabled = true,
+  debug = false,
+  min_length = 1,
+  preselect = 'disable',
+  throttle_time = 80,
+  source_timeout = 200,
+  resolve_timeout = 800,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
+  documentation = true,
+
+  source = {
+    calc = true,
+    path = true,
+    vsnip = true,
+    buffer = true,
+    nvim_lsp = true,
+    nvim_lua = true,
+    tags = false,
+    spell = false,
+    snippets_nvim = false,
+  },
+}

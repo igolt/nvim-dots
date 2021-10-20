@@ -24,8 +24,13 @@ nnoremap <leader>S :%s/
 
 nnoremap <silent>=f gg=G
 
+" Quick fix mappings
+nnoremap <leader>cn <cmd>cnext<cr>
+nnoremap <leader>cp <cmd>cprevious<cr>
+
 nnoremap <C-p> <cmd>Telescope find_files<cr>
 nnoremap <leader>td <cmd>Telescope vimdots<cr>
+nnoremap <leader>tl <cmd>Telescope live_grep<cr>
 
 " Buffers
 nnoremap ]b :bnext<cr>

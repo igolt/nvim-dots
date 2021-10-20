@@ -23,7 +23,7 @@ vim.g.mapleader = ' '
 vim.api.nvim_set_keymap('n', vim.g.mapleader, '', {noremap = true})
 vim.api.nvim_set_keymap('v', vim.g.mapleader, '', {noremap = true})
 
-local pack = require('core.pack')
+local pack = require('plugins')
 
 pack.ensure_plugins()
 require('core.options')
