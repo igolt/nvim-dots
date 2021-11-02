@@ -1,8 +1,8 @@
-if not packer_plugins['plenary.nvim'].loaded then
-  vim.cmd [[packadd plenary.nvim]]
-  vim.cmd [[packadd popup.nvim]]
-  vim.cmd [[packadd telescope-fzf-native.nvim]]
-end
+local loader = require('packer').loader
+
+loader('plenary.nvim')
+loader('popup.nvim')
+loader('telescope-fzf-native.nvim')
 
 local telescope = require('telescope')
 
@@ -15,6 +15,7 @@ telescope.setup {
       prompt_position = 'bottom',
     },
   },
+
   extensions = {
     fzf = {
       fuzzy = true,

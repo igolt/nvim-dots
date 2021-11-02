@@ -28,13 +28,3 @@ autopairs.add_rules {
   end)
   :use_key(']')
 }
-
-require("nvim-autopairs.completion.compe").setup {
-  map_cr = true,
-  map_complete = true,
-  auto_select = false,
-  map_char = {
-    all = '(',
-    tex = '{'
-  }
-}

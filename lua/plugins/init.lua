@@ -38,21 +38,28 @@ function plugins.setup()
     }
 
     use {
-      'hrsh7th/nvim-compe',
+      'hrsh7th/nvim-cmp',
+      after = 'nvim-lspconfig',
       event = 'InsertEnter',
-      config = load_config('completion')
+      config = load_config('completion'),
     }
-
     use {
       'hrsh7th/vim-vsnip',
-      after = 'nvim-compe',
-      config = load_config('vsnip'),
+      after = 'nvim-cmp',
+      config = load_config('vsnip')
     }
-
+    use {
+      'onsails/lspkind-nvim',
+      after = 'nvim-cmp'
+    }
+    use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
 
     use {
       'windwp/nvim-autopairs',
-      after = 'nvim-compe',
+      after = 'nvim-cmp',
       config = load_config('autopairs')
     }
 
@@ -114,11 +121,6 @@ function plugins.setup()
       'akinsho/nvim-bufferline.lua',
       config = load_config('bufferline'),
       requires = 'kyazdani42/nvim-web-devicons'
-    }
-
-    use {
-      'onsails/lspkind-nvim',
-      requires = 'kyazdani42/nvim-web-devicons',
     }
 
     use {

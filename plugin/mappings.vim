@@ -33,8 +33,8 @@ nnoremap <leader>td <cmd>Telescope vimdots<cr>
 nnoremap <leader>tl <cmd>Telescope live_grep<cr>
 
 " Buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprevious<cr>
+nnoremap <silent>]b :bnext<cr>
+nnoremap <silent>[b :bprevious<cr>
 nnoremap <leader>b  <cmd>BufferLinePick<cr>
 nnoremap <leader>x  <cmd>bdelete<cr>
 nnoremap <leader>X  <cmd>BufOnly<cr>
