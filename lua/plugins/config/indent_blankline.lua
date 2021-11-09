@@ -12,6 +12,7 @@ vim.g.indent_blankline_filetype_exclude = {
   "vimwiki",
   "markdown",
   "txt",
+  "man",
   "vista",
   "help",
   "todoist",

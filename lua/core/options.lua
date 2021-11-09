@@ -16,7 +16,7 @@ vim.o.wildignorecase = true;
 vim.o.wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
 
 vim.o.cursorline     = true
-vim.o.shortmess      = 'aoOTIFc'
+vim.o.shortmess      = 'aoOTIFcW'
 vim.o.showmode       = false
 vim.o.showcmd        = false
 vim.o.ruler          = false

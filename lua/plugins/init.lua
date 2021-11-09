@@ -32,6 +32,18 @@ function plugins.setup()
 
     -- Completion
     use {
+      'ray-x/lsp_signature.nvim',
+      after = 'nvim-lspconfig',
+      config = function ()
+         require "lsp_signature".setup({
+          bind = true,
+          handler_opts = {
+            border = "single"
+          }
+        })
+      end
+    }
+    use {
       'neovim/nvim-lspconfig',
       event = 'BufReadPre',
       config = load_config('lspconfig')
@@ -52,6 +64,7 @@ function plugins.setup()
       'onsails/lspkind-nvim',
       after = 'nvim-cmp'
     }
+    use {'hrsh7th/cmp-calc', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
@@ -179,6 +192,9 @@ function plugins.setup()
     }
 
     -- lang
+    use {
+      'lervag/vimtex',
+    }
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',

@@ -20,9 +20,10 @@ cmp.setup {
   },
 
   sources = cmp.config.sources({
-    {name = 'nvim_lsp'},
-    {name = 'vsnip'},
+    {name = 'calc'},
     {name = 'path'},
+    {name = 'vsnip'},
+    {name = 'nvim_lsp'},
   }, {
     {name = 'buffer'},
   }),
