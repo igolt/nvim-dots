@@ -27,6 +27,8 @@ nnoremap <silent>=f gg=G
 xnoremap <leader><leader>sl :!awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
 
 " Quick fix mappings
+nnoremap <leader>co <cmd>copen<cr>
+nnoremap <leader>cc <cmd>cclose<cr>
 nnoremap <leader>cn <cmd>cnext<cr>
 nnoremap <leader>cp <cmd>cprevious<cr>
 
