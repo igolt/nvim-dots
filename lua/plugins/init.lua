@@ -93,11 +93,17 @@ function plugins.setup()
         },
       }
     }
-
     -- UI
     use {
+      'rcarriga/nvim-notify',
+      config = [[vim.notify = require('notify')]]
+    }
+    use {
       'sainnhe/gruvbox-material',
-      config = 'vim.cmd [[colorscheme gruvbox-material]]'
+      config = function ()
+        vim.g.gruvbox_material_show_eob = 0
+        vim.cmd [[colorscheme gruvbox-material]]
+      end
     }
 
     use {
