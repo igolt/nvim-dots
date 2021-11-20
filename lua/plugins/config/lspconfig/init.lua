@@ -9,7 +9,4 @@ for server, config in pairs(lsp_servers) do
   lspconfig[server].setup(config)
 end
 
-lsp_utils.set_pretty_completion_item_kind()
-
--- Set iconic signs for the diagnostics
-lsp_utils.set_iconic_signs()
+lsp_utils.set_iconic_diagnostics_signs()

@@ -8,7 +8,7 @@ function utils.make_capabilities()
   )
 end
 
-function utils.set_iconic_signs()
+function utils.set_iconic_diagnostics_signs()
   vim.fn.sign_define('LspDiagnosticsSignHint'       , {text = ' '})
   vim.fn.sign_define('LspDiagnosticsSignError'      , {text = ' '})
   vim.fn.sign_define('LspDiagnosticsSignWarning'    , {text = ' '})
@@ -40,8 +40,7 @@ utils.on_attach = {
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings
-
-    local opts = {noremap=true, silent=true}
+    local opts = {noremap = true, silent = true}
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', '<leader>W', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -58,35 +57,5 @@ utils.on_attach = {
     buf_set_keymap('x', '<leader>f', ':lua vim.lsp.buf.range_formatting({tabSize = vim.o.ts})<CR>', opts)
   end
 }
-
-function utils.set_pretty_completion_item_kind()
-  require("vim.lsp.protocol").CompletionItemKind = {
-    " Text",           -- Text
-    " Method",         -- Method
-    "ƒ Function",       -- Function
-    " Constructor",    -- Constructor
-    "識 Field",         -- Field
-    " Variable",       -- Variable
-    " Class",          -- Class
-    "ﰮ Interface",      -- Interface
-    " Module",         -- Module
-    " Property",       -- Property
-    " Unit",           -- Unit
-    " Value",          -- Value
-    "了 Enum",          -- Enum
-    " Keyword",        -- Keyword
-    " Snippet",        -- Snippet
-    " Color",          -- Color
-    " File",           -- File
-    "渚 Reference",     -- Reference
-    " Folder",         -- Folder
-    " Enum",           -- Enum
-    " Constant",       -- Constant
-    " Struct",         -- Struct
-    "鬒 Event",         -- Event
-    "Ψ Operator",       -- Operator
-    " Type Parameter", -- TypeParameter
-  }
-end
 
 return utils
