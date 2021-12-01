@@ -1,5 +1,5 @@
-local home_path = require('core.global').home
-local sumneko_root_path = home_path .. '/Downloads/lua-language-server'
+local data_dir = require('core.global').data_dir
+local sumneko_root_path = data_dir .. '/lsp/servers/lua-language-server'
 local sumneko_binary = sumneko_root_path .. '/bin/Linux/lua-language-server'
 local sumneko_main = sumneko_root_path .. '/main.lua'
 local lsp_utils = require('plugins.config.lspconfig.utils')

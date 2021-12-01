@@ -20,8 +20,12 @@ vim.g.loaded_matchparen        = 1
 
 -- Set mapleader
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 vim.api.nvim_set_keymap('n', vim.g.mapleader, '', {noremap = true})
 vim.api.nvim_set_keymap('v', vim.g.mapleader, '', {noremap = true})
+
+vim.api.nvim_set_keymap('n', vim.g.maplocalleader, '', {noremap = true})
+vim.api.nvim_set_keymap('v', vim.g.maplocalleader, '', {noremap = true})
 
 local pack = require('plugins')
 

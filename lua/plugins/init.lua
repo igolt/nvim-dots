@@ -62,7 +62,8 @@ function plugins.setup()
     }
     use {
       'onsails/lspkind-nvim',
-      after = 'nvim-cmp'
+      after = 'nvim-cmp',
+      config = load_config('lspkind')
     }
     use {'hrsh7th/cmp-calc', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
@@ -84,8 +85,8 @@ function plugins.setup()
       cmd = 'Telescope',
       config = load_config('telescope'),
       requires = {
+        {'nvim-lua/plenary.nvim'},
         {'nvim-lua/popup.nvim', opt = true},
-        {'nvim-lua/plenary.nvim', opt = true},
         {
           'nvim-telescope/telescope-fzf-native.nvim',
           run = 'make',
@@ -114,7 +115,7 @@ function plugins.setup()
       'lewis6991/gitsigns.nvim' ,
       event = {'BufRead','BufNewFile'},
       config = load_config('gitsigns'),
-      requires = {'nvim-lua/plenary.nvim', opt = true}
+      requires = {'nvim-lua/plenary.nvim'}
     }
 
     use {
