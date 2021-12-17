@@ -40,6 +40,7 @@ end
 return {
   rename = function (opts)
     local current_name = vim.fn.expand('<cword>')
+    local pos = {vim.fn.line('.'), vim.fn.col('.')}
     local bufnr, winid = create_rename_prompt_win(opts or {})
 
     -- append current_name to the prompt
@@ -47,10 +48,11 @@ return {
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Esc>', '<cmd>quit<cr>', {noremap = true})
     -- For some reason when you press I text is inserted backwards
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'I', 'Bi', {noremap = true})
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'I', '0i', {noremap = true})
 
     vim.fn.prompt_setcallback(bufnr, function (new_name)
       vim.api.nvim_win_close(winid, true)
+      vim.api.nvim_win_set_cursor(0, pos)
       vim.lsp.buf.rename(new_name)
     end)
   end,
