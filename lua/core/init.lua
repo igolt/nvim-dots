@@ -18,14 +18,17 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit           = 1
 vim.g.loaded_matchparen        = 1
 
+local function unset_map(lhs)
+  vim.api.nvim_set_keymap('n', lhs, '', {noremap = true})
+  vim.api.nvim_set_keymap('v', lhs, '', {noremap = true})
+end
+
 -- Set mapleader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-vim.api.nvim_set_keymap('n', vim.g.mapleader, '', {noremap = true})
-vim.api.nvim_set_keymap('v', vim.g.mapleader, '', {noremap = true})
 
-vim.api.nvim_set_keymap('n', vim.g.maplocalleader, '', {noremap = true})
-vim.api.nvim_set_keymap('v', vim.g.maplocalleader, '', {noremap = true})
+unset_map(vim.g.mapleader)
+unset_map(vim.g.maplocalleader)
 
 local pack = require('plugins')
 

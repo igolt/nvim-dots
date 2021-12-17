@@ -198,9 +198,8 @@ function plugins.setup()
     }
 
     -- lang
-    use {
-      'lervag/vimtex',
-    }
+    use {'lervag/vimtex'}
+    use {'tranvansang/octave.vim'}
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
