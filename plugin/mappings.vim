@@ -14,7 +14,6 @@ nnoremap <leader>w <cmd>w<cr>
 nnoremap <leader>q <cmd>q<cr>
 nnoremap <leader>fq <cmd>qa<cr>
 nnoremap du 0D
-nnoremap Y y$
 
 nnoremap <leader>e :e 
 nnoremap <leader>v :vsplit 

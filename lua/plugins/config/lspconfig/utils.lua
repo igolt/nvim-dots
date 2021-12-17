@@ -9,10 +9,10 @@ function utils.make_capabilities()
 end
 
 function utils.set_iconic_diagnostics_signs()
-  vim.fn.sign_define('LspDiagnosticsSignHint'       , {text = ' '})
-  vim.fn.sign_define('LspDiagnosticsSignError'      , {text = ' '})
-  vim.fn.sign_define('LspDiagnosticsSignWarning'    , {text = ' '})
-  vim.fn.sign_define('LspDiagnosticsSignInformation', {text = ' '})
+  vim.fn.sign_define('DiagnosticSignError', {text = ' ', texthl = 'DiagnosticSignError'})
+  vim.fn.sign_define('DiagnosticSignWarn' , {text = ' ', texthl = 'DiagnosticSignWarn'})
+  vim.fn.sign_define('DiagnosticSignInfo' , {text = ' ', texthl = 'DiagnosticSignInfo'})
+  vim.fn.sign_define('DiagnosticSignHint' , {text = ' ', texthl = 'DiagnosticSignHint'})
 end
 
 utils.on_attach = {
