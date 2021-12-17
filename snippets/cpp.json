@@ -1,0 +1,25 @@
+{
+  "Include guard": {
+    "prefix": "#ifndef",
+    "body": [
+      "#ifndef ${1:INCLUDE_GUARD}",
+      "#define ${1:INCLUDE_GUARD}",
+      "$0",
+      "",
+      "#endif /* ${1:INCLUDE_GUARD} */"
+    ]
+  },
+  "Standard Starter Template": {
+    "prefix": "sst",
+    "body": [
+      "#include <iostream>$1",
+      "",
+      "int",
+      "main(${2:int argc, char *argv[]})",
+      "{",
+        "\t$0",
+        "\treturn 0;",
+        "}"
+    ]
+  }
+}

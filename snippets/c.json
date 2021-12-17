@@ -1,0 +1,15 @@
+{
+  "Standard Starter Template": {
+    "prefix": "sst",
+    "body": [
+      "#include <stdio.h>$1",
+      "",
+      "int",
+      "main(${2:int argc, char *argv[]})",
+      "{",
+        "\t$0",
+        "\treturn 0;",
+        "}"
+    ]
+  }
+}
