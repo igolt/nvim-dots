@@ -132,7 +132,6 @@ function plugins.setup()
 
     use {
       'kyazdani42/nvim-tree.lua',
-      cmd = {'NvimTreeToggle', 'NvimTreeOpen'},
       config = load_config('nvim_tree'),
       requires = 'kyazdani42/nvim-web-devicons'
     }

@@ -1,4 +1,3 @@
-vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_icons = {
   default =  '',
@@ -32,8 +31,3 @@ require('nvim-tree').setup {
     }
   }
 }
-
--- On Ready Event for Lazy Loading work
-require("nvim-tree.events").on_nvim_tree_ready(function()
-  vim.cmd("NvimTreeRefresh")
-end)
