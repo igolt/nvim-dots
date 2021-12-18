@@ -3,16 +3,16 @@ local sumneko_root_path = data_dir .. '/lsp/servers/lua-language-server'
 local sumneko_binary = sumneko_root_path .. '/bin/Linux/lua-language-server'
 local sumneko_main = sumneko_root_path .. '/main.lua'
 local lsp_utils = require('plugins.config.lspconfig.utils')
+local null_ls = require("null-ls")
 
-local nls = require('null-ls')
-
-nls.config {
-  save_after_format = false,
+null_ls.setup({
   sources = {
-    nls.builtins.diagnostics.eslint_d,
-    nls.builtins.formatting.prettierd
-  }
-}
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.prettierd
+  },
+  on_attach = lsp_utils.on_attach.set_lsp_keymappings
+})
 
 local servers = {
   clangd = {
@@ -55,9 +55,8 @@ local servers = {
   intelephense = {},
   rust_analyzer = {},
   tsserver = {
-    on_attach = lsp_utils.on_attach.ts_utils,
+    on_attach = lsp_utils.on_attach.ts_server
   },
-  ['null-ls'] = {}
 }
 
 return servers

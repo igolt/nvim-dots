@@ -16,23 +16,6 @@ function utils.set_iconic_diagnostics_signs()
 end
 
 utils.on_attach = {
-  ts_utils = function (client, _)
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-
-    local ts_utils = require('nvim-lsp-ts-utils')
-
-    ts_utils.setup {
-      debug = false,
-      disable_commands = false,
-      enable_import_on_completion = true,
-    }
-
-    vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
-
-    ts_utils.setup_client(client)
-  end,
-
   set_lsp_keymappings = function (_, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -55,7 +38,25 @@ utils.on_attach = {
     buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     buf_set_keymap('x', '<leader>f', ':lua vim.lsp.buf.range_formatting({tabSize = vim.o.ts})<CR>', opts)
-  end
+  end,
 }
+
+utils.on_attach.ts_server = function (client, bufnr)
+  utils.on_attach.set_lsp_keymappings(client, bufnr)
+
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+
+  local ts_utils = require('nvim-lsp-ts-utils')
+
+  ts_utils.setup {
+    enable_import_on_completion = true,
+    auto_inlay_hints = false,
+  }
+
+  vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
+
+  ts_utils.setup_client(client)
+end
 
 return utils
