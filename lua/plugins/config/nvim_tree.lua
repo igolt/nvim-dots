@@ -21,6 +21,8 @@ require('nvim-tree').setup {
     enable = true,
   },
   view = {
+    auto_resize = true,
+    hide_root_folder = true,
     mappings = {
       costom_only = false,
       list = {

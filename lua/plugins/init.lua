@@ -103,6 +103,7 @@ function plugins.setup()
       'sainnhe/gruvbox-material',
       config = function ()
         vim.g.gruvbox_material_show_eob = 0
+        vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
         vim.cmd [[colorscheme gruvbox-material]]
       end
     }
@@ -148,6 +149,7 @@ function plugins.setup()
     }
 
     -- Editor plugins
+    use {'folke/zen-mode.nvim', cmd = 'ZenMode'}
     use {
       'itchyny/vim-cursorword',
       event = {'BufReadPre','BufNewFile'},
