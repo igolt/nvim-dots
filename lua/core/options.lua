@@ -3,8 +3,9 @@ vim.o.clipboard      = 'unnamedplus'
 vim.o.mouse          = 'nvi'
 vim.o.backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim"
 vim.o.switchbuf      = "useopen"
-vim.o.history        = 2000
+vim.o.history        = 200
 
+vim.o.updatetime     = 300
 vim.o.tabstop        = 2
 vim.o.softtabstop    = 2
 vim.o.shiftwidth     = 0

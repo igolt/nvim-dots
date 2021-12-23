@@ -32,18 +32,6 @@ function plugins.setup()
 
     -- Completion
     use {
-      'ray-x/lsp_signature.nvim',
-      after = 'nvim-lspconfig',
-      config = function ()
-         require "lsp_signature".setup({
-          bind = true,
-          handler_opts = {
-            border = "single"
-          }
-        })
-      end
-    }
-    use {
       'neovim/nvim-lspconfig',
       event = 'BufReadPre',
       config = load_config('lspconfig')
@@ -55,16 +43,19 @@ function plugins.setup()
       event = 'InsertEnter',
       config = load_config('completion'),
     }
+
     use {
       'hrsh7th/vim-vsnip',
       after = 'nvim-cmp',
       config = load_config('vsnip')
     }
+
     use {
       'onsails/lspkind-nvim',
       after = 'nvim-cmp',
       config = load_config('lspkind')
     }
+
     use {'hrsh7th/cmp-calc', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
     use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
@@ -94,16 +85,16 @@ function plugins.setup()
         },
       }
     }
+
     -- UI
-    use {
-      'rcarriga/nvim-notify',
-      config = [[vim.notify = require('notify')]]
-    }
+    use {'rcarriga/nvim-notify'}
+
     use {
       'sainnhe/gruvbox-material',
       config = function ()
         vim.g.gruvbox_material_show_eob = 0
         vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
+        vim.g.gruvbox_material_sign_column_background = 'none'
         vim.cmd [[colorscheme gruvbox-material]]
       end
     }
@@ -112,6 +103,7 @@ function plugins.setup()
       'glepnir/dashboard-nvim',
       config = load_config('dashboard')
     }
+
     use {
       'lewis6991/gitsigns.nvim' ,
       event = {'BufRead','BufNewFile'},
@@ -149,7 +141,6 @@ function plugins.setup()
     }
 
     -- Editor plugins
-    use {'folke/zen-mode.nvim', cmd = 'ZenMode'}
     use {
       'itchyny/vim-cursorword',
       event = {'BufReadPre','BufNewFile'},
@@ -162,17 +153,13 @@ function plugins.setup()
       config = load_config('easy_align')
     }
 
-    use {'tpope/vim-repeat'}
-
-
+    use 'tpope/vim-repeat'
+    use 'godlygeek/tabular'
+    use {'folke/zen-mode.nvim', cmd = 'ZenMode'}
     use {'tpope/vim-surround', event = 'BufRead'}
-
-    use {'tpope/vim-commentary', event = 'BufRead'}
-
     use {'numToStr/BufOnly.nvim', cmd = 'BufOnly'}
-
+    use {'tpope/vim-commentary', event = 'BufRead'}
     use {'editorconfig/editorconfig-vim', event = 'BufRead'}
-
     use {'akinsho/nvim-toggleterm.lua', config = load_config('toggleterm')}
 
     use {
@@ -202,6 +189,7 @@ function plugins.setup()
     -- lang
     use {'lervag/vimtex'}
     use {'tranvansang/octave.vim'}
+
     use {
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate',
@@ -220,11 +208,11 @@ function plugins.setup()
   end)
 
   -- set some nice mappings
-  local remap = vim.api.nvim_set_keymap
+  local keymap = vim.api.nvim_set_keymap
   local opts = {noremap = true}
 
-  remap('n', '<leader>ps', '<cmd>PackerSync<cr>', opts)
-  remap('n', '<leader>pc', '<cmd>PackerCompile<cr>', opts)
+  keymap('n', '<leader>ps', '<cmd>PackerSync<cr>', opts)
+  keymap('n', '<leader>pc', '<cmd>PackerCompile<cr>', opts)
 end
 
 return plugins
