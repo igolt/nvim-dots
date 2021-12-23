@@ -32,6 +32,9 @@ local function req(module)
   Warn(("Could not load module `%s`"):format(module))
 end
 
+-- Set colorscheme name
+vim.g.colorscheme = 'gruvbox-material'
+
 -- Set mapleader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -39,6 +42,7 @@ vim.g.maplocalleader = ' '
 unset_map(vim.g.mapleader)
 unset_map(vim.g.maplocalleader)
 
+req('core.colorscheme')
 req('plugins')
 req('core.options')
 req('core.event')
