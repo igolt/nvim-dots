@@ -30,11 +30,10 @@ vim.g.dashboard_custom_section = {
 }
 
 vim.cmd [[
-augroup augroup UserDashboard
-autocmd FileType dashboard nmap <buffer>l <Cr>
-autocmd FileType dashboard highlight clear StatusLine
-autocmd FileType dashboard set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2
-augroup END
+  augroup augroup UserDashboard
+    autocmd FileType dashboard nmap <buffer>l <Cr>
+    autocmd FileType dashboard set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
+  augroup END
 ]]
 
 vim.g.dashboard_disable_statusline = 1

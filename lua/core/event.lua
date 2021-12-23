@@ -18,7 +18,6 @@ function autocmd.load_autocmds()
   local definitions = {
     bufs = {
       -- Reload vim script automatically if setlocal autoread
-      {"BufWritePost,FileWritePost", "*.vim", [[nested if &l:autoread > 0 | source <afile> | echo 'source ' . bufname('%') | endif]]};
       {"BufWritePre", "/tmp/*", "setlocal noundofile"};
       {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"};
       {"BufWritePre", "MERGE_MSG", "setlocal noundofile"};
@@ -30,7 +29,7 @@ function autocmd.load_autocmds()
       -- Equalize window dimensions when resizing vim window
       {"VimResized", "*", [[tabdo wincmd =]]},
       -- Force white shada when leaving Nvim
-      {'VimLeave', '*', [[if has('nvim') | wshada! | else | wviminfo! | endif]]},
+      {'VimLeave', '*', [[wshada! | else | wviminfo!]]},
       -- Check if file changed when its window is focused, more eager than 'autoread'
       {'FocusGained', '* checktime'}
     },

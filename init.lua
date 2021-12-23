@@ -25,6 +25,13 @@ local function unset_map(lhs)
   vim.api.nvim_set_keymap('v', lhs, '', {noremap = true})
 end
 
+local function req(module)
+  local ok, res = pcall(require, module)
+
+  if ok then return res end
+  Warn(("Could not load module `%s`"):format(module))
+end
+
 -- Set mapleader
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -32,9 +39,6 @@ vim.g.maplocalleader = ' '
 unset_map(vim.g.mapleader)
 unset_map(vim.g.maplocalleader)
 
-local pack = require('plugins')
-
-pack.ensure_plugins()
-pcall(require, 'core.options')
-pcall(require, 'core.event')
-pack.setup()
+req('plugins')
+req('core.options')
+req('core.event')

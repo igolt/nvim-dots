@@ -1,218 +1,182 @@
 local data_dir = require('core.global').data_dir
-local uv = vim.loop
 
-local plugins = {}
+local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
+local packer_bootstrap = false
 
-function plugins.ensure_plugins()
-  local packer_dir = data_dir .. '/pack/packer/opt/packer.nvim'
-  local state = uv.fs_stat(packer_dir)
-
-  if not state then
-    vim.api.nvim_command(
-    "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
-    )
-    uv.fs_mkdir(data_dir .. '/lua', 511, function()
-      assert("make compile path dir faield")
-    end)
-  end
+if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
+  packer_bootstrap = vim.fn.system {
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    packer_dir
+  }
+  vim.notify('Installing packer...')
+  vim.cmd [[packadd packer.nvim]]
 end
 
-function plugins.setup()
-  vim.api.nvim_command('packadd packer.nvim')
-  local packer = require('packer')
+local ok, packer = pcall(require, 'packer')
 
-  packer.init {
-    git     = {clone_timeout = 120},
-    display = {open_fn = require('packer.util').float}
+if not ok then
+  Warn("Could not load packer")
+  return
+end
+
+packer.init {
+  git     = {clone_timeout = 120},
+  display = {
+    open_fn = function ()
+      return require('packer.util').float { border = 'rounded' }
+    end
+  }
+}
+
+packer.startup(function (use)
+  local load_config = require('plugins.utils').load_config
+  use 'wbthomason/packer.nvim'
+
+  -- Essential plugins
+  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-lua/popup.nvim'
+
+  -- Completion
+  use {
+    'neovim/nvim-lspconfig',
+    event  = 'BufReadPre',
+    config = load_config('lspconfig')
   }
 
-  packer.startup(function (use)
-    local load_config = require('plugins.utils').load_config
-    use {"wbthomason/packer.nvim", opt = true}
+  use {
+    'hrsh7th/nvim-cmp',
+    after  = 'nvim-lspconfig',
+    event  = 'InsertEnter',
+    config = load_config('completion'),
+  }
 
-    -- Completion
-    use {
-      'neovim/nvim-lspconfig',
-      event = 'BufReadPre',
-      config = load_config('lspconfig')
-    }
+  use {
+    'hrsh7th/vim-vsnip',
+    after  = 'nvim-cmp',
+    config = load_config('vsnip')
+  }
 
-    use {
-      'hrsh7th/nvim-cmp',
-      after = 'nvim-lspconfig',
-      event = 'InsertEnter',
-      config = load_config('completion'),
-    }
+  use {
+    'onsails/lspkind-nvim',
+    after  = 'nvim-cmp',
+    config = load_config('lspkind')
+  }
 
-    use {
-      'hrsh7th/vim-vsnip',
-      after = 'nvim-cmp',
-      config = load_config('vsnip')
-    }
+  use {'hrsh7th/cmp-calc'    , after = 'nvim-cmp'}
+  use {'hrsh7th/cmp-path'    , after = 'nvim-cmp'}
+  use {'hrsh7th/cmp-vsnip'   , after = 'nvim-cmp'}
+  use {'hrsh7th/cmp-buffer'  , after = 'nvim-cmp'}
+  use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
 
-    use {
-      'onsails/lspkind-nvim',
-      after = 'nvim-cmp',
-      config = load_config('lspkind')
-    }
+  use { 'windwp/nvim-autopairs',
+    after  = 'nvim-cmp',
+    config = load_config('autopairs')
+  }
 
-    use {'hrsh7th/cmp-calc', after = 'nvim-cmp'}
-    use {'hrsh7th/cmp-path', after = 'nvim-cmp'}
-    use {'hrsh7th/cmp-vsnip', after = 'nvim-cmp'}
-    use {'hrsh7th/cmp-buffer', after = 'nvim-cmp'}
-    use {'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp'}
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
-    use {
-      'windwp/nvim-autopairs',
-      after = 'nvim-cmp',
-      config = load_config('autopairs')
-    }
-
-    use {'jose-elias-alvarez/null-ls.nvim'}
-    use {'jose-elias-alvarez/nvim-lsp-ts-utils'}
-
-    use {
-      'nvim-telescope/telescope.nvim',
-      cmd = 'Telescope',
-      config = load_config('telescope'),
-      requires = {
-        {'nvim-lua/plenary.nvim'},
-        {'nvim-lua/popup.nvim', opt = true},
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          run = 'make',
-          opt = true
-        },
+  use {
+    'nvim-telescope/telescope.nvim',
+    cmd      = 'Telescope',
+    config   = load_config('telescope'),
+    requires = {
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make',
+        opt = true
       }
     }
+  }
 
-    -- UI
-    use {'rcarriga/nvim-notify'}
+  -- UI
+  use 'rcarriga/nvim-notify'
 
-    use {
-      'sainnhe/gruvbox-material',
-      config = function ()
-        vim.g.gruvbox_material_show_eob = 0
-        vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
-        vim.g.gruvbox_material_sign_column_background = 'none'
-        vim.cmd [[colorscheme gruvbox-material]]
-      end
-    }
+  use 'sainnhe/gruvbox-material'
 
-    use {
-      'glepnir/dashboard-nvim',
-      config = load_config('dashboard')
-    }
+  use {'glepnir/dashboard-nvim', config = load_config('dashboard')}
 
-    use {
-      'lewis6991/gitsigns.nvim' ,
-      event = {'BufRead','BufNewFile'},
-      config = load_config('gitsigns'),
-      requires = {'nvim-lua/plenary.nvim'}
-    }
+  use {
+    'lewis6991/gitsigns.nvim' ,
+    event  = {'BufRead','BufNewFile'},
+    config = load_config('gitsigns'),
+  }
 
-    use {
-      'lukas-reineke/indent-blankline.nvim',
-      event = 'BufRead',
-      config = load_config('indent_blankline')
-    }
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    event  = 'BufRead',
+    config = load_config('indent_blankline')
+  }
 
-    use {
-      'nvim-lualine/lualine.nvim',
-      config = load_config('lualine'),
-      requires = {'kyazdani42/nvim-web-devicons', opt = true},
-    }
+  use {'nvim-lualine/lualine.nvim'  , config = load_config('lualine')}
+  use {'kyazdani42/nvim-tree.lua'   , config = load_config('nvim-tree')}
+  use {'norcalli/nvim-colorizer.lua', config = load_config('colorizer')}
+  use {'akinsho/nvim-bufferline.lua', config = load_config('bufferline')}
 
-    use {
-      'kyazdani42/nvim-tree.lua',
-      config = load_config('nvim_tree'),
-      requires = 'kyazdani42/nvim-web-devicons'
-    }
+  -- Editor plugins
+  use {
+    'itchyny/vim-cursorword',
+    event  = {'BufReadPre','BufNewFile'},
+    config = load_config('cursorword')
+  }
 
-    use {
-      'akinsho/nvim-bufferline.lua',
-      config = load_config('bufferline'),
-      requires = 'kyazdani42/nvim-web-devicons'
-    }
+  use {'junegunn/vim-easy-align', config = load_config('easy_align')}
 
-    use {
-      'norcalli/nvim-colorizer.lua',
-      config = load_config('colorizer')
-    }
+  use 'tpope/vim-repeat'
+  use 'godlygeek/tabular'
+  use {'folke/zen-mode.nvim'          , cmd    = 'ZenMode'}
+  use {'numToStr/BufOnly.nvim'        , cmd    = 'BufOnly'}
+  use {'tpope/vim-surround'           , event  = 'BufRead'}
+  use {'tpope/vim-commentary'         , event  = 'BufRead'}
+  use {'editorconfig/editorconfig-vim', event  = 'BufRead'}
+  use {'akinsho/nvim-toggleterm.lua'  , config = load_config('toggleterm')}
 
-    -- Editor plugins
-    use {
-      'itchyny/vim-cursorword',
-      event = {'BufReadPre','BufNewFile'},
-      config = load_config('cursorword')
-    }
+  use {
+    'andymass/vim-matchup',
+    event  = 'BufEnter',
+    config = load_config('matchup')
+  }
 
-    use {
-      'junegunn/vim-easy-align',
-      event = 'BufRead',
-      config = load_config('easy_align')
-    }
+  -- tools
+  use 'tpope/vim-fugitive'
 
-    use 'tpope/vim-repeat'
-    use 'godlygeek/tabular'
-    use {'folke/zen-mode.nvim', cmd = 'ZenMode'}
-    use {'tpope/vim-surround', event = 'BufRead'}
-    use {'numToStr/BufOnly.nvim', cmd = 'BufOnly'}
-    use {'tpope/vim-commentary', event = 'BufRead'}
-    use {'editorconfig/editorconfig-vim', event = 'BufRead'}
-    use {'akinsho/nvim-toggleterm.lua', config = load_config('toggleterm')}
+  use {
+    'iamcco/markdown-preview.nvim',
+    ft     = 'markdown',
+    run    = 'cd app && npm install',
+    config = [[vim.g.mkdp_auto_start = 0]]
+  }
 
-    use {
-      'andymass/vim-matchup',
-      event = 'BufEnter',
-      config = load_config('matchup')
-    }
+  use {
+    'windwp/nvim-ts-autotag',
+    after  = 'nvim-treesitter',
+    config = [[require('nvim-ts-autotag').setup()]]
+  }
 
-    -- tools
-    use {'tpope/vim-fugitive'}
+  -- lang
+  use 'lervag/vimtex'
+  use 'tranvansang/octave.vim'
+  use 'pantharshit00/vim-prisma'
 
-    use {
-      'iamcco/markdown-preview.nvim',
-      ft = 'markdown',
-      run = 'cd app && npm install',
-      config = [[vim.g.mkdp_auto_start = 0]]
-    }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run    = ':TSUpdate',
+    event  = 'BufEnter',
+    config = load_config('treesitter'),
+  }
+  use {'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter'}
+end)
 
-    use {
-      'windwp/nvim-ts-autotag',
-      after = 'nvim-treesitter',
-      config = function ()
-        require('nvim-ts-autotag').setup()
-      end
-    }
+-- set some nice mappings
+local keymap = vim.api.nvim_set_keymap
+local opts = {noremap = true}
 
-    -- lang
-    use {'lervag/vimtex'}
-    use {'tranvansang/octave.vim'}
+keymap('n' , '<leader>ps' , '<cmd>PackerSync<cr>'    , opts)
+keymap('n' , '<leader>pc' , '<cmd>PackerCompile<cr>' , opts)
 
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      event = 'BufEnter',
-      config = load_config('treesitter'),
-    }
-
-    use {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      after = 'nvim-treesitter'
-    }
-
-    use  {
-      'pantharshit00/vim-prisma'
-    }
-  end)
-
-  -- set some nice mappings
-  local keymap = vim.api.nvim_set_keymap
-  local opts = {noremap = true}
-
-  keymap('n', '<leader>ps', '<cmd>PackerSync<cr>', opts)
-  keymap('n', '<leader>pc', '<cmd>PackerCompile<cr>', opts)
-end
-
-return plugins
+if packer_bootstrap then packer.sync() end
