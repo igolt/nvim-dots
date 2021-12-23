@@ -1,4 +1,4 @@
 local remap = vim.api.nvim_set_keymap;
 
-remap('n', 'ga', ':EasyAlign<cr>', {noremap = true})
-remap('x', 'ga', ':EasyAlign<cr>', {noremap = true})
+remap('n', 'ga', '<Plug>(EasyAlign)', {})
+remap('x', 'ga', '<Plug>(EasyAlign)', {})
