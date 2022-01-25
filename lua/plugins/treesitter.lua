@@ -1,7 +1,8 @@
 require'nvim-treesitter.configs'.setup {
+  context_commentstring = {enable = true},
   ensure_installed = {
-    'cpp',
     'c',
+    'cpp',
     'html',
     'lua',
     'javascript',
@@ -21,8 +22,7 @@ require'nvim-treesitter.configs'.setup {
       keymaps = {
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
+        ['ic'] = '@comment.outer',
       }
     }
   },

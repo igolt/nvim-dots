@@ -1,4 +1,4 @@
-require'lualine'.setup {
+return {
   options = {
     theme = 'auto',
     disabled_filetypes = {'dashboard'},

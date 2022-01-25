@@ -24,7 +24,6 @@ vim.o.ruler          = false
 vim.o.relativenumber = true
 vim.o.number         = true
 vim.o.hlsearch       = true
-vim.o.inccommand     = 'split'
 vim.o.listchars      = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 vim.o.list           = true
 

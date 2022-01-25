@@ -1,6 +1,6 @@
 {
   "Standard Starter Template": {
-    "prefix": "sst",
+    "prefix": ["#include", "sst"],
     "body": [
       "#include <stdio.h>$1",
       "",

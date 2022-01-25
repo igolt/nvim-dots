@@ -1,15 +1,13 @@
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_icons = {
   default =  '',
-  symlink =  '',
   git = {
     unstaged = "✚",
     staged =  "✚",
-    unmerged =  "≠",
-    renamed =  "≫",
-    untracked = "★",
   },
 }
+
+local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 require('nvim-tree').setup {
   disable_netrw = true,
@@ -26,17 +24,18 @@ require('nvim-tree').setup {
     ignore = false,
   },
   view = {
-    number = true,
-    relativenumber = true,
-    signcolumn = "no",
+    -- number = true,
+    -- relativenumber = true,
+    -- signcolumn = "no",
     auto_resize = true,
     hide_root_folder = true,
     mappings = {
       costom_only = false,
       list = {
-        {key = {'l'}, cb = "<cmd>lua require'nvim-tree'.on_keypress('edit')<CR>"};
-        {key = {'s'}, cb = "<cmd>lua require'nvim-tree'.on_keypress('vsplit')<CR>"};
-        {key = {'i'}, cb = "<cmd>lua require'nvim-tree'.on_keypress('split')<CR>"};
+        {key = 'l', cb = tree_cb("edit")};
+        {key = 's', cb = tree_cb("vsplit")};
+        {key = 'i', cb = tree_cb("split")};
+        {key = 'o', cb = tree_cb("system_open")};
       }
     }
   }

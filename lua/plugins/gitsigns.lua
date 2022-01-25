@@ -5,6 +5,7 @@ end
 require('gitsigns').setup {
   signs = {
     delete = {text = '│'},
+    changedelete = {text = ''},
   },
   keymaps = {
     ['n ]c'] = {expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'"},

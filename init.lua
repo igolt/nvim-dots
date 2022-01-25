@@ -1,4 +1,15 @@
-require('core.notify')
+local ok, notify = pcall(require, 'notify')
+if ok then vim.notify = notify end
+
+Warn  = function (msg, opts) vim.notify(msg, "warn", opts) end
+Error = function (msg, opts) vim.notify(msg, "error", opts) end
+
+local function req(module)
+  local status_ok, res = pcall(require, module)
+
+  if status_ok then return res end
+  Warn(("Could not load module `%s`"):format(module))
+end
 
 -- Disable distribution plugins
 vim.g.loaded_gzip              = 1
@@ -20,29 +31,9 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit           = 1
 vim.g.loaded_matchparen        = 1
 
-local function unset_map(lhs)
-  vim.api.nvim_set_keymap('n', lhs, '', {noremap = true})
-  vim.api.nvim_set_keymap('v', lhs, '', {noremap = true})
-end
-
-local function req(module)
-  local ok, res = pcall(require, module)
-
-  if ok then return res end
-  Warn(("Could not load module `%s`"):format(module))
-end
-
--- Set colorscheme name
-vim.g.colorscheme = 'gruvbox-material'
-
--- Set mapleader
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-unset_map(vim.g.mapleader)
-unset_map(vim.g.maplocalleader)
-
+req('user.config')
 req('core.colorscheme')
-req('plugins')
 req('core.options')
+req('core.plugins')
 req('core.event')
+req('core.mappings')
