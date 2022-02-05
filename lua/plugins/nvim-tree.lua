@@ -7,6 +7,8 @@ vim.g.nvim_tree_icons = {
   },
 }
 
+vim.g.nvim_tree_special_files = {}
+
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
 require('nvim-tree').setup {
@@ -24,8 +26,8 @@ require('nvim-tree').setup {
     ignore = false,
   },
   view = {
-    -- number = true,
-    -- relativenumber = true,
+    number = true,
+    relativenumber = true,
     -- signcolumn = "no",
     auto_resize = true,
     hide_root_folder = true,
