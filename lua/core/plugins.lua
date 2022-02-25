@@ -103,12 +103,7 @@ packer.startup(function (use)
     config = load_config('indent_blankline')
   }
 
-  local function use_statusline(use_feline)
-    use {'feline-nvim/feline.nvim'    , config = load_config('feline'),  opt = not use_feline}
-    use {'nvim-lualine/lualine.nvim'  , config = load_config('lualine'), opt = use_feline}
-  end
-
-  use_statusline(false)
+  use {'feline-nvim/feline.nvim', config = load_config('feline')}
 
   use {'kyazdani42/nvim-tree.lua'   , config = load_config('nvim-tree')}
   use {'norcalli/nvim-colorizer.lua', config = load_config('colorizer')}
