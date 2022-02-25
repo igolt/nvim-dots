@@ -3,6 +3,8 @@ local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
 local packer_bootstrap = false
 
 if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
+  vim.notify 'Installing packer...'
+
   packer_bootstrap = vim.fn.system {
     'git',
     'clone',
@@ -11,8 +13,8 @@ if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
     'https://github.com/wbthomason/packer.nvim',
     packer_dir
   }
-  vim.notify('Installing packer...')
-  vim.cmd [[packadd packer.nvim]]
+
+  vim.cmd 'packadd packer.nvim'
 end
 
 local ok, packer = pcall(require, 'packer')
@@ -94,13 +96,7 @@ packer.startup(function (use)
   use {'folke/todo-comments.nvim', config = load_config('todo-comments')}
 
   -- colorschemes
-  use "projekt0n/github-nvim-theme"
-  use 'getomni/neovim'
-  use 'lunarvim/colorschemes'
-  use 'catppuccin/nvim'
   use 'sainnhe/gruvbox-material'
-  use 'folke/tokyonight.nvim'
-  use 'marko-cerovac/material.nvim'
 
   use {
     'lukas-reineke/indent-blankline.nvim',
