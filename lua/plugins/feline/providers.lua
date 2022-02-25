@@ -1,5 +1,6 @@
+local vi_mode_utils = require('feline.providers.vi_mode')
+
 local M = {}
-local feline_vi_mode = require('feline.providers.vi_mode').vi_mode
 
 local function get_effective_tabstop(bufnr)
   local bo = bufnr and vim.bo[bufnr] or vim.bo
@@ -21,8 +22,7 @@ M.position = function ()
 end
 
 M.vi_mode = function ()
-  local component = {icon = ''}
-  return '-- ' .. feline_vi_mode(component, {}) .. ' --'
+  return (' -- %s --'):format(vi_mode_utils.get_vim_mode())
 end
 
 M.git_branch = function ()

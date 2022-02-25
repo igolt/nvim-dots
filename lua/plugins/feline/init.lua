@@ -8,9 +8,18 @@ end
 local preset = stlineconfig.preset
 
 local ok, config = pcall(require, 'plugins.feline.presets.' .. preset)
-if not ok then
+if ok then
+  if config.theme == nil and vim.g.colors_name then
+    local theme
+
+    ok, theme = pcall(require, 'plugins.feline.themes.' .. vim.g.colors_name)
+    if ok then
+      config.theme = theme
+    end
+  end
+else
   Warn(('Could not load `%s` status line preset\nFallbacking to default'):format(preset))
-  config = {}
+  config = {theme = 'default'}
 end
 
 require('feline').setup(config)
