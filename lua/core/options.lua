@@ -14,7 +14,7 @@ vim.o.expandtab      = true
 vim.o.smartindent    = true
 vim.o.hidden         = true
 vim.o.wildignorecase = true;
-vim.o.wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**";
+vim.o.wildignore     = ".git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,*.DS_Store,**/node_modules/**,**/bower_modules/**";
 
 vim.o.cursorline     = true
 vim.o.shortmess      = 'aoOTIFcW'
