@@ -31,9 +31,8 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit           = 1
 vim.g.loaded_matchparen        = 1
 
-req('user.config')
-req('core.colorscheme')
 req('core.options')
+req('core.colorscheme')
 req('core.plugins')
 req('core.event')
 req('core.mappings')
