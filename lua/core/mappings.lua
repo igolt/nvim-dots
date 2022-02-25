@@ -16,6 +16,9 @@ keymap("n", "Q", "<Nop>", opts)
 -- Disable highlight search
 keymap("n", "<Esc>", "<Cmd>noh<Cr>", opts)
 
+-- Open URL under cursor
+keymap("n", "gx", "<cmd>lua require('internal.utils').open_url()<cr>", opts)
+
 --  Window navigation
 keymap("n", "<C-h>", ":wincmd h<cr>", opts)
 keymap("n", "<C-j>", ":wincmd j<cr>", opts)
