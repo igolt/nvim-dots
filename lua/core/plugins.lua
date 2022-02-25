@@ -150,7 +150,7 @@ packer.startup(function (use)
   use {
     'iamcco/markdown-preview.nvim',
     ft     = 'markdown',
-    run    = 'cd app && npm install',
+    run    = 'cd app && yarn install',
     config = [[vim.g.mkdp_auto_start = 0]]
   }
 
