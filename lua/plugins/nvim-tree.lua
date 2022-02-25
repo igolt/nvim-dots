@@ -9,8 +9,6 @@ vim.g.nvim_tree_icons = {
 
 vim.g.nvim_tree_special_files = {}
 
-local tree_cb = require('nvim-tree.config').nvim_tree_callback
-
 require('nvim-tree').setup {
   disable_netrw = true,
   open_on_tab = true,
@@ -26,18 +24,18 @@ require('nvim-tree').setup {
     ignore = false,
   },
   view = {
-    number = true,
-    relativenumber = true,
+    -- number = true,
+    -- relativenumber = true,
     -- signcolumn = "no",
     auto_resize = true,
     hide_root_folder = true,
     mappings = {
       costom_only = false,
       list = {
-        {key = 'l', cb = tree_cb("edit")};
-        {key = 's', cb = tree_cb("vsplit")};
-        {key = 'i', cb = tree_cb("split")};
-        {key = 'o', cb = tree_cb("system_open")};
+        {key = 'l', action = "edit"};
+        {key = 's', action = "vsplit"};
+        {key = 'i', action = "split"};
+        {key = 'o', action = "system_open"};
       }
     }
   }
