@@ -62,7 +62,7 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
-keymap("v", "p", '"_dP', opts)
+keymap("x", "p", '"_dP', opts)
 
 -- Sort lines based on their length
 keymap("x", "<leader><leader>sl", [[:!awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<cr>]], opts)
