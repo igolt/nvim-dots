@@ -3,8 +3,8 @@ local sumneko_root_path = data_dir .. '/lsp/servers/lua-language-server'
 local sumneko_binary = sumneko_root_path .. '/bin/Linux/lua-language-server'
 local sumneko_main = sumneko_root_path .. '/main.lua'
 local null_ls = require("null-ls")
-local default_attach = require('plugins.lspconfig.handlers').on_attach
-local capabilities = require('plugins.lspconfig.handlers').capabilities
+local default_on_attach = require('plugins.lspconfig.handlers').on_attach
+local default_capabilities = require('plugins.lspconfig.handlers').capabilities
 
 local eslint_d_config = {
   condition = function (utils)
@@ -19,14 +19,14 @@ local eslint_d_config = {
   end
 }
 
-null_ls.setup({
+null_ls.setup {
   sources = {
     null_ls.builtins.code_actions.eslint_d.with(eslint_d_config),
     null_ls.builtins.formatting.eslint_d.with(eslint_d_config),
     null_ls.builtins.diagnostics.eslint_d.with(eslint_d_config),
     null_ls.builtins.formatting.prettierd
   },
-})
+}
 
 local servers = {
   clangd = {
@@ -61,22 +61,22 @@ local servers = {
     on_attach = function(client, bufnr)
       local ts_utils = require("nvim-lsp-ts-utils")
 
-        ts_utils.setup({
-            import_all_timeout = 2000, -- ms
-            auto_inlay_hints = false,
-        })
+      ts_utils.setup {
+        import_all_timeout = 2000, -- ms
+        auto_inlay_hints = false,
+      }
 
-        -- required to fix code action ranges and filter diagnostics
-        ts_utils.setup_client(client)
+      -- required to fix code action ranges and filter diagnostics
+      ts_utils.setup_client(client)
 
-        -- Let null_ls handle formatting
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+      -- Let null_ls handle formatting
+      client.resolved_capabilities.document_formatting = false
+      client.resolved_capabilities.document_range_formatting = false
 
-        -- Format on save
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+      -- Format on save
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
 
-        default_attach(client, bufnr)
+      default_on_attach(client, bufnr)
     end
   },
 
@@ -97,8 +97,9 @@ local set_if_abscent = function (table, field, value)
 end
 
 for server, config in pairs(servers) do
-  set_if_abscent(config, 'on_attach'   , default_attach)
-  set_if_abscent(config, 'capabilities', capabilities)
+  set_if_abscent(config, 'on_attach'   , default_on_attach)
+  set_if_abscent(config, 'capabilities', default_capabilities)
+
   lspconfig[server].setup(config)
 end
 
