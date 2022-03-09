@@ -79,10 +79,10 @@ keymap("n", "<leader>td", "<cmd>Telescope vimdots<cr>"    , opts)
 keymap("n", "<leader>tl", "<cmd>Telescope live_grep<cr>"  , opts)
 
 -- Buffers
-keymap("n", "]b"       , ":bnext<cr>"             , opts)
-keymap("n", "[b"       , ":bprevious<cr>"         , opts)
-keymap("n", "<leader>x", "<cmd>bdelete<cr>"       , opts)
-keymap("n", "<leader>X", "<cmd>BufOnly<cr>"       , opts)
+keymap("n", "<Tab>"    , ":bnext<cr>"                , opts)
+keymap("n", "<S-Tab>"  , ":bprevious<cr>"            , opts)
+keymap("n", "<leader>x", "<cmd>bdelete<cr>"          , opts)
+keymap("n", "<leader>X", "<cmd>BufOnly<cr>"          , opts)
 keymap("n", "<leader>b", "<cmd>Telescope buffers<cr>", opts)
 
 keymap("n", "<C-n>", "<cmd>NvimTreeToggle<cr>", opts)
