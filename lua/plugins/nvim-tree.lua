@@ -10,24 +10,21 @@ vim.g.nvim_tree_icons = {
 vim.g.nvim_tree_special_files = {}
 
 require('nvim-tree').setup {
-  disable_netrw = true,
-  open_on_tab = true,
-  hijack_cursor = true,
-  update_cwd = true,
-  diagnostics = {enable = true},
-  filters = {custom = {'.git'}},
-  update_focused_file = {
-    enable = true,
-  },
+  disable_netrw       = true,
+  hijack_cursor       = true,
+  open_on_tab         = true,
+  update_cwd          = true,
+  diagnostics         = {enable = true},
+  update_focused_file = {enable = true},
+  filters             = {custom = {'.git'}},
+  actions             = {open_file = {resize_window = true}},
+
   git = {
     enable = true,
     ignore = false,
   },
+
   view = {
-    -- number = true,
-    -- relativenumber = true,
-    -- signcolumn = "no",
-    auto_resize = true,
     hide_root_folder = true,
     mappings = {
       costom_only = false,
