@@ -1,4 +1,3 @@
-vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_icons = {
   default =  '',
   git = {
@@ -35,5 +34,7 @@ require('nvim-tree').setup {
         {key = 'o', action = "system_open"};
       }
     }
-  }
+  },
+
+  renderer = {indent_markers = {enable = true}}
 }
