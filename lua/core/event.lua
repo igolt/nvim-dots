@@ -1,33 +1,37 @@
+local autocmd = vim.api.nvim_create_autocmd
+
+local function highlight_on_yank()
+  vim.highlight.on_yank({higroup='Visual'})
+end
+
 local definitions = {
   bufs = {
-    {"BufWritePre", "/tmp/*"        , "setlocal noundofile"};
-    {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"};
-    {"BufWritePre", "MERGE_MSG"     , "setlocal noundofile"};
-    {"BufWritePre", "*.tmp"         , "setlocal noundofile"};
-    {"BufWritePre", "*.bak"         , "setlocal noundofile"};
+    {"BufWritePre", {pattern = "/tmp/*"        , command = "setlocal noundofile"}};
+    {"BufWritePre", {pattern = "COMMIT_EDITMSG", command = "setlocal noundofile"}};
+    {"BufWritePre", {pattern = "MERGE_MSG"     , command = "setlocal noundofile"}};
+    {"BufWritePre", {pattern = "*.tmp"         , command = "setlocal noundofile"}};
+    {"BufWritePre", {pattern = "*.bak"         , command = "setlocal noundofile"}};
   },
 
   wins = {
     -- Equalize window dimensions when resizing vim window
-    {"VimResized",   "*",  [[tabdo wincmd =]]},
+    {"VimResized", {command = "tabdo wincmd ="}},
     -- Force write shada when leaving Nvim
-    {'VimLeave',     '*',  [[wshada!]]},
+    {'VimLeave', {command = "wshada!"}},
     -- Check if file changed when its window is focused, more eager than 'autoread'
-    {'FocusGained' , '*',  'checktime'},
+    {'FocusGained', {command = 'checktime'}},
   },
 
   yank = {
-    {'TextYankPost', [[* silent! lua vim.highlight.on_yank({higroup='Visual'})]]}
+    {'TextYankPost', {callback = highlight_on_yank}}
   },
 }
 
 for group_name, definition in pairs(definitions) do
-  vim.api.nvim_command('augroup ' .. group_name)
-  vim.api.nvim_command('autocmd!')
+  vim.api.nvim_create_augroup(group_name, {})
 
   for _, def in ipairs(definition) do
-    local command = table.concat(vim.tbl_flatten{'autocmd', def}, ' ')
-    vim.api.nvim_command(command)
+    def[2].group = group_name
+    autocmd(def[1], def[2])
   end
-  vim.api.nvim_command('augroup END')
 end
