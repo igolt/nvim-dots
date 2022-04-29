@@ -129,8 +129,6 @@ packer.startup(function (use)
   use {
     'lewis6991/gitsigns.nvim' ,
     config = load_config('gitsigns'),
-    lock = true,
-    commit = 'ddffc618ea9e11ae57129549e0eccf832cb8b37d'
   }
 
   -- filetype plugins
