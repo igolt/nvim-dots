@@ -83,6 +83,7 @@ local servers = {
   html          = {},
   cssls         = {},
   vimls         = {},
+  jsonls        = {},
   pyright       = {},
   intelephense  = {},
   rust_analyzer = {},
