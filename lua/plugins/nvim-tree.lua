@@ -1,13 +1,3 @@
-vim.g.nvim_tree_icons = {
-  default =  '',
-  git = {
-    unstaged = "✚",
-    staged =  "✚",
-  },
-}
-
-vim.g.nvim_tree_special_files = {}
-
 require('nvim-tree').setup {
   disable_netrw       = true,
   hijack_cursor       = true,
@@ -36,5 +26,15 @@ require('nvim-tree').setup {
     }
   },
 
-  renderer = {indent_markers = {enable = true}}
+  renderer = {
+    indent_markers = {enable = true},
+    icons = {
+      glyphs = {
+        git = {
+          unstaged = "✚",
+          staged =  "✚",
+        }
+      }
+    }
+  }
 }
