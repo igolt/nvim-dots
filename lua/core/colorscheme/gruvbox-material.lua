@@ -44,8 +44,6 @@ bg("TelescopeSelection", black2)
 fg("NvimTreeEndOfBuffer", darker_black)
 bg("NvimTreeNormal", darker_black)
 bg("NvimTreeNormalNC", darker_black)
-fg_bg("NvimTreeStatusLine", darker_black, darker_black)
-fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
 fg_bg("NvimTreeVertSplit", darker_black, darker_black)
 
 -- Floating windows

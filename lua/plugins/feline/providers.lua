@@ -31,4 +31,20 @@ M.git_branch = function ()
   return head or '', ' '
 end
 
+M.file_type = function ()
+  local filetype = vim.bo.filetype
+
+  if filetype == '' then
+    return ''
+  end
+
+  if filetype == 'toggleterm' then
+    filetype = filetype .. '#' .. vim.b.toggle_number
+  elseif filetype == 'TelescopePrompt' then
+    filetype = 'telescope'
+  end
+
+  return filetype == '' and '' or (' %s '):format(filetype:upper())
+end
+
 return M

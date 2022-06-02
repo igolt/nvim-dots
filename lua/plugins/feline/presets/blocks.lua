@@ -82,4 +82,17 @@ local active_right = {
   {}
 }
 
-return {components = {active = {active_left, active_right}}}
+local inactive_left = {
+  {
+    provider = providers.file_type,
+    hl = {bg = 'violet', fg = 'bg', style = 'bold'}
+  },
+  {}
+}
+
+return {
+  components = {
+    active = {active_left, active_right},
+    inactive = {inactive_left}
+  }
+}

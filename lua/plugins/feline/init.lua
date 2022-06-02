@@ -22,4 +22,21 @@ else
   config = {theme = 'default'}
 end
 
-require('feline').setup(config)
+require('feline').setup(vim.tbl_extend("force", config, {
+  force_inactive = {
+    filetypes = {
+      '^NvimTree$',
+      '^packer$',
+      '^startify$',
+      '^fugitive$',
+      '^fugitiveblame$',
+      '^qf$',
+      '^help$',
+      '^TelescopePrompt$'
+    },
+    buftypes = {
+      '^terminal$'
+    },
+    bufnames = {}
+  }
+}))
