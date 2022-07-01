@@ -32,7 +32,8 @@ require('feline').setup(vim.tbl_extend("force", config, {
       '^fugitiveblame$',
       '^qf$',
       '^help$',
-      '^TelescopePrompt$'
+      '^TelescopePrompt$',
+      '^alpha$'
     },
     buftypes = {
       '^terminal$'
