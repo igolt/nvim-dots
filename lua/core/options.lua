@@ -5,6 +5,9 @@ vim.o.backupskip     = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.
 vim.o.switchbuf      = "useopen"
 vim.o.history        = 200
 
+vim.o.ignorecase     = true
+vim.o.smartcase      = true
+
 vim.o.laststatus     = 3
 vim.o.updatetime     = 300
 vim.o.tabstop        = 2
