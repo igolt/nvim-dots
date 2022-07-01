@@ -39,9 +39,11 @@ M.file_type = function ()
   end
 
   if filetype == 'toggleterm' then
-    filetype = filetype .. '#' .. vim.b.toggle_number
+    filetype = 'Terminal#' .. vim.b.toggle_number
   elseif filetype == 'TelescopePrompt' then
     filetype = 'telescope'
+  elseif filetype == 'alpha' then
+    filetype = 'neovim'
   end
 
   return filetype == '' and '' or (' %s '):format(filetype:upper())
