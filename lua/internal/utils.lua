@@ -7,16 +7,18 @@ local fmt = string.format
 
 local M = {}
 
-M.open_url = function (uri)
+M.open_url = function(uri)
   if not uri then
     uri = expand('<cfile>')
     uri = substitute(uri, '?', '\\?', '')
     uri = shellescape(uri, 1)
 
-    if uri == '' then return end
+    if uri == '' then
+      return
+    end
   end
 
-  vim.cmd(fmt("silent! !xdg-open %s", uri))
+  vim.cmd(fmt('silent! !xdg-open %s', uri))
 end
 
 return M

@@ -1,5 +1,5 @@
-require'nvim-treesitter.configs'.setup {
-  context_commentstring = {enable = true},
+require('nvim-treesitter.configs').setup {
+  context_commentstring = { enable = true },
   ensure_installed = {
     'c',
     'cpp',
@@ -9,12 +9,12 @@ require'nvim-treesitter.configs'.setup {
     'typescript',
     'tsx',
     'php',
-    'python'
+    'python',
   },
-  highlight = {enable = true},
+  highlight = { enable = true },
   indent = {
     enable = true,
-    disable = {'lua', 'c', 'cpp', 'html'}
+    disable = { 'lua', 'c', 'cpp', 'html' },
   },
   textobjects = {
     select = {
@@ -25,11 +25,11 @@ require'nvim-treesitter.configs'.setup {
         ['af'] = '@function.outer',
         ['if'] = '@function.inner',
         ['ic'] = '@comment.outer',
-      }
-    }
+      },
+    },
   },
   matchup = {
     enable = true,
-    disable = {'c', 'cpp'}
-  }
+    disable = { 'c', 'cpp' },
+  },
 }

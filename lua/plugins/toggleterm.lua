@@ -1,6 +1,6 @@
 require('toggleterm').setup {
-  size = function (term)
-    if term.direction == "horizontal" then
+  size = function(term)
+    if term.direction == 'horizontal' then
       return 15
     else
       return math.floor(vim.o.columns * 0.4)
@@ -14,5 +14,5 @@ require('toggleterm').setup {
   start_in_insert = true,
   insert_mappings = true,
   persist_size = true,
-  direction = 'horizontal'
+  direction = 'horizontal',
 }

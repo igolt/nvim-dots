@@ -3,7 +3,7 @@ local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
 local packer_bootstrap = false
 
 if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
-  vim.notify 'Installing packer...'
+  vim.notify('Installing packer...')
 
   packer_bootstrap = vim.fn.system {
     'git',
@@ -11,150 +11,170 @@ if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
     '--depth',
     '1',
     'https://github.com/wbthomason/packer.nvim',
-    packer_dir
+    packer_dir,
   }
 
-  vim.cmd 'packadd packer.nvim'
+  vim.cmd('packadd packer.nvim')
 end
 
 local ok, packer = pcall(require, 'packer')
 if not ok then
-  Warn("Could not load packer")
+  Warn('Could not load packer')
   return
 end
 
 packer.init {
-  git     = {clone_timeout = 120},
+  git = { clone_timeout = 120 },
   display = {
-    open_fn = function ()
+    open_fn = function()
       return require('packer.util').float { border = 'rounded' }
-    end
-  }
+    end,
+  },
 }
 
-vim.cmd [[
+vim.cmd([[
   augroup PackerUserConfig
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup END
-]]
+]])
 
 local function load_config(config)
   local modname = 'plugins.' .. config
 
-  return string.format([[
+  return string.format(
+    [[
     local ok, _ = pcall(require, '%s')
 
     if not ok then Warn("Failed loading config file for: '%s'") end
-  ]], modname, config)
+  ]],
+    modname,
+    config
+  )
 end
 
-packer.startup(function (use)
+packer.startup(function(use)
   -- Essential plugins
-  use 'wbthomason/packer.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-lua/popup.nvim'
-  use {'kyazdani42/nvim-web-devicons', config = load_config('devicons')}
+  use('wbthomason/packer.nvim')
+  use('nvim-lua/plenary.nvim')
+  use('nvim-lua/popup.nvim')
+  use { 'kyazdani42/nvim-web-devicons', config = load_config('devicons') }
 
   -- Completion
-  use 'hrsh7th/cmp-calc'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-vsnip'
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-nvim-lsp'
+  use('hrsh7th/cmp-calc')
+  use('hrsh7th/cmp-path')
+  use('hrsh7th/cmp-vsnip')
+  use('hrsh7th/cmp-buffer')
+  use('hrsh7th/cmp-nvim-lsp')
 
-  use {'hrsh7th/nvim-cmp', config = load_config('completion')}
+  use { 'hrsh7th/nvim-cmp', config = load_config('completion') }
 
   -- Snippets
-  use {'hrsh7th/vim-vsnip', config = load_config('vsnip')}
+  use { 'hrsh7th/vim-vsnip', config = load_config('vsnip') }
 
   -- Autopairs
-  use {'windwp/nvim-autopairs', config = load_config('autopairs')}
+  use { 'windwp/nvim-autopairs', config = load_config('autopairs') }
 
   -- LSP
-  use {'neovim/nvim-lspconfig', config = load_config('lspconfig')}
-  use 'jose-elias-alvarez/null-ls.nvim'
-  use 'jose-elias-alvarez/nvim-lsp-ts-utils'
+  use { 'neovim/nvim-lspconfig', config = load_config('lspconfig') }
+  use('jose-elias-alvarez/null-ls.nvim')
+  use('jose-elias-alvarez/nvim-lsp-ts-utils')
 
   use {
     'nvim-telescope/telescope.nvim',
-    config =  load_config('telescope'),
-    cmd    = 'Telescope',
+    config = load_config('telescope'),
+    cmd = 'Telescope',
     module = 'telescope',
     requires = {
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make',
-        opt = true
-      }
-    }
+        opt = true,
+      },
+    },
   }
 
   -- UI
-  use 'rcarriga/nvim-notify'
-  use {'goolord/alpha-nvim', config = load_config('alpha'), after = 'nvim-tree.lua'}
-  use {'folke/todo-comments.nvim', config = load_config('todo-comments')}
+  use('rcarriga/nvim-notify')
+  use {
+    'goolord/alpha-nvim',
+    config = load_config('alpha'),
+    after = 'nvim-tree.lua',
+  }
+  use { 'folke/todo-comments.nvim', config = load_config('todo-comments') }
 
   -- colorschemes
-  use 'sainnhe/gruvbox-material'
+  use('folke/tokyonight.nvim')
+  use('LunarVim/Colorschemes')
+  use('Mofiqul/dracula.nvim')
+  use('sainnhe/gruvbox-material')
 
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = load_config('indent_blankline')
+    config = load_config('indent_blankline'),
   }
 
-  use {'feline-nvim/feline.nvim', config = load_config('feline')}
+  use { 'feline-nvim/feline.nvim', config = load_config('feline') }
 
-  use {'kyazdani42/nvim-tree.lua'   , config = load_config('nvim-tree')}
-  use {'norcalli/nvim-colorizer.lua', config = load_config('colorizer')}
-  use {'akinsho/nvim-bufferline.lua', config = load_config('bufferline')}
+  use { 'kyazdani42/nvim-tree.lua', config = load_config('nvim-tree') }
+  use { 'norcalli/nvim-colorizer.lua', config = load_config('colorizer') }
+  use { 'akinsho/nvim-bufferline.lua', config = load_config('bufferline') }
 
   -- Editor plugins
-  use 'godlygeek/tabular'
-  use {'junegunn/vim-easy-align', config = load_config('easy_align')}
+  use('godlygeek/tabular')
+  use { 'junegunn/vim-easy-align', config = load_config('easy_align') }
 
-  use {'folke/zen-mode.nvim'          , cmd    = 'ZenMode'}
-  use {'numToStr/BufOnly.nvim'        , cmd    = 'BufOnly'}
-  use {'akinsho/nvim-toggleterm.lua'  , config = load_config('toggleterm')}
+  use { 'folke/zen-mode.nvim', cmd = 'ZenMode' }
+  use { 'numToStr/BufOnly.nvim', cmd = 'BufOnly' }
+  use { 'akinsho/nvim-toggleterm.lua', config = load_config('toggleterm') }
 
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
-  use 'tpope/vim-commentary'
-  use 'editorconfig/editorconfig-vim'
+  use('jghauser/mkdir.nvim')
+  use('tpope/vim-repeat')
+  use('tpope/vim-surround')
+  use('tpope/vim-commentary')
+  use('gpanders/editorconfig.nvim')
 
-  use {'andymass/vim-matchup', config = [[vim.g.matchup_matchparen_offscreen = {method = 'popup'}]]}
+  use {
+    'andymass/vim-matchup',
+    config = [[vim.g.matchup_matchparen_offscreen = {method = 'popup'}]],
+  }
 
   -- Git
-  use 'tpope/vim-fugitive'
+  use('tpope/vim-fugitive')
   use {
-    'lewis6991/gitsigns.nvim' ,
+    'lewis6991/gitsigns.nvim',
     config = load_config('gitsigns'),
   }
 
   -- filetype plugins
-  use 'lervag/vimtex'
-  use 'tranvansang/octave.vim'
-  use 'pantharshit00/vim-prisma'
+  use('lervag/vimtex')
+  use('tranvansang/octave.vim')
+  use('pantharshit00/vim-prisma')
 
   use {
     'iamcco/markdown-preview.nvim',
-    ft     = 'markdown',
-    run    = 'cd app && yarn install',
-    config = [[vim.g.mkdp_auto_start = 0]]
+    ft = 'markdown',
+    run = 'cd app && yarn install',
+    config = [[vim.g.mkdp_auto_start = 0]],
   }
 
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
-    run    = ':TSUpdate',
+    run = ':TSUpdate',
     config = load_config('treesitter'),
   }
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-  use {'windwp/nvim-ts-autotag', config = "require('nvim-ts-autotag').setup()"}
+  use('JoosepAlviste/nvim-ts-context-commentstring')
+  use('nvim-treesitter/nvim-treesitter-textobjects')
+  use {
+    'windwp/nvim-ts-autotag',
+    config = "require('nvim-ts-autotag').setup()",
+  }
 
   -- fix cursor hold
-  use {'antoinemadec/FixCursorHold.nvim'}
+  use { 'antoinemadec/FixCursorHold.nvim' }
 end)
 
-if packer_bootstrap then packer.sync() end
+if packer_bootstrap then
+  packer.sync()
+end

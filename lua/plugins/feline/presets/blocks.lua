@@ -3,7 +3,7 @@ local providers = require('plugins.feline.providers')
 
 local function with_sep(component_info)
   component_info.right_sep = ' '
-  component_info.left_sep  = ' '
+  component_info.left_sep = ' '
 
   return component_info
 end
@@ -22,77 +22,77 @@ local active_left = {
   {
     provider = 'file_info',
     hl = { style = 'bold' },
-    left_sep  = '  ',
+    left_sep = '  ',
     right_sep = ' ',
   },
   {
     icon = ' ',
     provider = providers.git_branch,
-    hl       = {fg = 'magenta', style = 'bold'},
-    left_sep = ' '
+    hl = { fg = 'magenta', style = 'bold' },
+    left_sep = ' ',
   },
   {
     icon = ' +',
     provider = 'git_diff_added',
-    hl = {fg = 'green'}
+    hl = { fg = 'green' },
   },
   {
     icon = ' ~',
     provider = 'git_diff_changed',
-    hl = {fg = 'oceanblue'}
+    hl = { fg = 'oceanblue' },
   },
   {
     icon = ' -',
     provider = 'git_diff_removed',
-    hl = {fg = 'red'},
+    hl = { fg = 'red' },
   },
 }
 
 local active_right = {
   {
     provider = 'diagnostic_errors',
-    hl = {fg = 'red'}
+    hl = { fg = 'red' },
   },
   {
     provider = 'diagnostic_warnings',
-    hl = {fg = 'yellow'}
+    hl = { fg = 'yellow' },
   },
   {
     provider = 'diagnostic_hints',
-    hl = {fg = 'cyan'}
+    hl = { fg = 'cyan' },
   },
   {
     provider = 'diagnostic_info',
-    hl = {fg = 'skyblue'}
+    hl = { fg = 'skyblue' },
   },
   with_sep {
-    provider = 'file_format'
+    provider = 'file_format',
   },
   with_sep {
-    provider = 'file_encoding'
+    provider = 'file_encoding',
   },
   {
-    provider = {name = 'position', opts = {padding = true}},
+    provider = { name = 'position', opts = { padding = true } },
   },
   {
     provider = 'line_percentage',
-    left_sep = ' '
+    left_sep = ' ',
   },
-  with_sep {provider = 'scroll_bar', hl = {fg = 'orange'}},
-  {}
+  with_sep { provider = 'scroll_bar', hl = { fg = 'orange' } },
+  {},
 }
 
 local inactive_left = {
   {
     provider = providers.file_type,
-    hl = {bg = 'violet', fg = 'bg', style = 'bold'}
+    hl = { bg = 'violet', fg = 'bg', style = 'bold' },
   },
-  {}
+  {},
 }
 
 return {
   components = {
-    active = {active_left, active_right},
-    inactive = {inactive_left}
-  }
+    active = { active_left, active_right },
+    inactive = { inactive_left },
+  },
 }

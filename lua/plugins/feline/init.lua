@@ -18,11 +18,15 @@ if ok then
     end
   end
 else
-  Warn(('Could not load `%s` status line preset\nFallbacking to default'):format(preset))
-  config = {theme = 'default'}
+  Warn(
+    ('Could not load `%s` status line preset\nFallbacking to default'):format(
+      preset
+    )
+  )
+  config = { theme = 'default' }
 end
 
-require('feline').setup(vim.tbl_extend("force", config, {
+require('feline').setup(vim.tbl_extend('force', config, {
   force_inactive = {
     filetypes = {
       '^NvimTree$',
@@ -33,11 +37,12 @@ require('feline').setup(vim.tbl_extend("force", config, {
       '^qf$',
       '^help$',
       '^TelescopePrompt$',
-      '^alpha$'
+      '^alpha$',
+      '^neo\\-tree$',
     },
     buftypes = {
-      '^terminal$'
+      '^terminal$',
     },
-    bufnames = {}
-  }
+    bufnames = {},
+  },
 }))

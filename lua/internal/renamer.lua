@@ -4,7 +4,9 @@ local renamer_opts = {
 
 local function set_if_defined(opts, field)
   local option = opts[field]
-  if option then renamer_opts[field] = option end
+  if option then
+    renamer_opts[field] = option
+  end
 end
 
 local function get_opt(opts, field)
@@ -31,34 +33,44 @@ local function create_rename_prompt_win(opts)
 
   vim.api.nvim_win_set_option(winid, 'scrolloff', 0)
   vim.api.nvim_win_set_option(winid, 'sidescrolloff', 0)
-  vim.api.nvim_command('autocmd QuitPre <buffer> ++nested ++once :silent lua vim.api.nvim_win_close(0, true)')
-  vim.api.nvim_command('autocmd WinLeave <buffer> ++nested ++once :silent lua vim.api.nvim_win_close(0, true)')
+  vim.api.nvim_command(
+    'autocmd QuitPre <buffer> ++nested ++once :silent lua vim.api.nvim_win_close(0, true)'
+  )
+  vim.api.nvim_command(
+    'autocmd WinLeave <buffer> ++nested ++once :silent lua vim.api.nvim_win_close(0, true)'
+  )
 
   return bufnr, winid
 end
 
 return {
-  rename = function (opts)
+  rename = function(opts)
     local current_name = vim.fn.expand('<cword>')
-    local pos = {vim.fn.line('.'), vim.fn.col('.')}
+    local pos = { vim.fn.line('.'), vim.fn.col('.') }
     local bufnr, winid = create_rename_prompt_win(opts or {})
 
     -- append current_name to the prompt
     vim.cmd('normal! i' .. current_name)
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Esc>', '<cmd>quit<cr>', {noremap = true})
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      'n',
+      '<Esc>',
+      '<cmd>quit<cr>',
+      { noremap = true }
+    )
     -- For some reason when you press I text is inserted backwards
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'I', '0i', {noremap = true})
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'I', '0i', { noremap = true })
 
-    vim.fn.prompt_setcallback(bufnr, function (new_name)
+    vim.fn.prompt_setcallback(bufnr, function(new_name)
       vim.api.nvim_win_close(winid, true)
       vim.api.nvim_win_set_cursor(0, pos)
       vim.lsp.buf.rename(new_name)
     end)
   end,
 
-  config = function (opts)
+  config = function(opts)
     -- TODO(igolt): make it more customizable
     set_if_defined(opts, 'buf_prompt')
-  end
+  end,
 }

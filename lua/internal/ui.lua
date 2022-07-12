@@ -1,6 +1,6 @@
 local M = {}
 
-M.extract_hl_colors = function  (hl_group, scope)
+M.extract_hl_colors = function(hl_group, scope)
   if vim.fn.hlexists(hl_group) == 0 then
     return nil
   end
