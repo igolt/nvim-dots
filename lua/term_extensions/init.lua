@@ -21,4 +21,7 @@ return {
   c_code_runner = function()
     code_runner('. ~/.config/bash/functions; csource')
   end,
+  cpp_code_runner = function()
+    code_runner('. ~/.config/bash/functions; cppsource')
+  end,
 }

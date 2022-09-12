@@ -4,6 +4,7 @@ vim.o.mouse = 'nvi'
 vim.o.backupskip =
   '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim'
 vim.o.switchbuf = 'useopen'
+vim.o.spl = 'en,pt_br'
 vim.o.history = 200
 
 vim.o.ignorecase = true

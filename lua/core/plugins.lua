@@ -1,5 +1,6 @@
 local data_dir = require('core.global').data_dir
 local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
+local local_plugins_dir = require('core.global').local_plugins_dir
 local packer_bootstrap = false
 
 if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
@@ -44,10 +45,10 @@ local function load_config(config)
 
   return string.format(
     [[
-    local ok, _ = pcall(require, '%s')
+      local ok, _ = pcall(require, '%s')
 
-    if not ok then Warn("Failed loading config file for: '%s'") end
-  ]],
+      if not ok then Warn("Failed loading config file for: '%s'") end
+    ]],
     modname,
     config
   )
@@ -99,7 +100,6 @@ packer.startup(function(use)
   use {
     'goolord/alpha-nvim',
     config = load_config('alpha'),
-    after = 'nvim-tree.lua',
   }
   use { 'folke/todo-comments.nvim', config = load_config('todo-comments') }
 
@@ -108,6 +108,7 @@ packer.startup(function(use)
   use('LunarVim/Colorschemes')
   use('Mofiqul/dracula.nvim')
   use('sainnhe/gruvbox-material')
+  use(local_plugins_dir .. '/gruvbox-material.nvim')
 
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -135,8 +136,13 @@ packer.startup(function(use)
   use('gpanders/editorconfig.nvim')
 
   use {
+    'xiyaowong/link-visitor.nvim',
+    config = [[require('link-visitor').setup()]],
+  }
+
+  use {
     'andymass/vim-matchup',
-    config = [[vim.g.matchup_matchparen_offscreen = {method = 'popup'}]],
+    config = [[vim.g.matchup_matchparen_offscreen = { method = 'popup' }]],
   }
 
   -- Git
@@ -150,12 +156,13 @@ packer.startup(function(use)
   use('lervag/vimtex')
   use('tranvansang/octave.vim')
   use('pantharshit00/vim-prisma')
+  use { 'Fymyte/rasi.vim', ft = 'rasi' }
 
   use {
     'iamcco/markdown-preview.nvim',
     ft = 'markdown',
     run = 'cd app && yarn install',
-    config = [[vim.g.mkdp_auto_start = 0]],
+    config = load_config('markdown-preview'),
   }
 
   -- Treesitter
@@ -166,11 +173,14 @@ packer.startup(function(use)
   }
   use('JoosepAlviste/nvim-ts-context-commentstring')
   use('nvim-treesitter/nvim-treesitter-textobjects')
+  use('nvim-treesitter/playground')
   use {
     'windwp/nvim-ts-autotag',
     config = "require('nvim-ts-autotag').setup()",
   }
 
+  -- spell for brazilian portuguese
+  use('mateusbraga/vim-spell-pt-br')
   -- fix cursor hold
   use { 'antoinemadec/FixCursorHold.nvim' }
 end)

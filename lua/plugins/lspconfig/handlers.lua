@@ -1,4 +1,5 @@
 local M = {}
+local map = require('core.mappings')
 
 M.setup = function()
   local signs = {
@@ -63,70 +64,28 @@ end
 
 local function lsp_keymaps(bufnr)
   local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
+    map.buf_set_keymap(bufnr, ...)
   end
 
   -- Mappings
-  local opts = { noremap = true, silent = true }
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-  buf_set_keymap('n', '<leader>W', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap(
-    'n',
-    '<leader>gi',
-    '<cmd>lua vim.lsp.buf.implementation()<CR>',
-    opts
-  )
-  buf_set_keymap(
-    'n',
-    '<C-s>',
-    '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-    opts
-  )
-  buf_set_keymap(
-    'i',
-    '<C-s>',
-    '<cmd>lua vim.lsp.buf.signature_help()<CR>',
-    opts
-  )
-  buf_set_keymap(
-    'n',
-    '<leader>D',
-    '<cmd>lua vim.lsp.buf.type_definition()<CR>',
-    opts
-  )
-  buf_set_keymap(
-    'n',
-    '<leader>rn',
-    '<cmd>lua require("internal.renamer").rename()<CR>',
-    opts
-  )
-  buf_set_keymap(
-    'n',
-    '<leader>ca',
-    '<cmd>lua vim.lsp.buf.code_action()<CR>',
-    opts
-  )
-  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  buf_set_keymap(
-    'n',
-    '<leader>d',
-    '<cmd>lua vim.diagnostic.open_float()<CR>',
-    opts
-  )
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap(
-    'n',
-    '<leader>f',
-    '<cmd>lua vim.lsp.buf.formatting()<CR>',
-    opts
-  )
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
+  buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>')
+  buf_set_keymap('n', '<leader>W', vim.lsp.buf.hover)
+  buf_set_keymap('n', '<leader>gi', vim.lsp.buf.implementation)
+  buf_set_keymap('n', '<C-s>', vim.lsp.buf.signature_help)
+  buf_set_keymap('i', '<C-s>', vim.lsp.buf.signature_help)
+  buf_set_keymap('n', '<leader>D', vim.lsp.buf.type_definition)
+  buf_set_keymap('n', '<leader>rn', vim.lsp.buf.rename)
+  buf_set_keymap('n', '<leader>ca', vim.lsp.buf.code_action)
+  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>')
+  buf_set_keymap('n', '<leader>d', vim.diagnostic.open_float)
+  buf_set_keymap('n', '[d', vim.diagnostic.goto_prev)
+  buf_set_keymap('n', ']d', vim.diagnostic.goto_next)
+  buf_set_keymap('n', '<leader>f', vim.lsp.buf.formatting)
   buf_set_keymap(
     'x',
     '<leader>f',
-    ':lua vim.lsp.buf.range_formatting({tabSize = vim.o.ts})<CR>',
-    opts
+    ':lua vim.lsp.buf.range_formatting({tabSize = vim.o.ts})<CR>'
   )
 end
 

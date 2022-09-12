@@ -80,6 +80,8 @@ local servers = {
   },
 
   tsserver = {
+    single_file_support = true,
+
     on_attach = function(client, bufnr)
       local ts_utils = require('nvim-lsp-ts-utils')
 
