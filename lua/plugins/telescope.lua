@@ -1,9 +1,17 @@
 local telescope = require('telescope')
+local mappings = {
+  ['<C-x>'] = false,
+  ['<C-h>'] = require('telescope.actions').select_vertical,
+}
 
 require('packer').loader('telescope-fzf-native.nvim')
 
 telescope.setup {
   defaults = {
+    mappings = {
+      i = mappings,
+      n = mappings,
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -40,10 +48,6 @@ telescope.setup {
     color_devicons = true,
     use_less = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-  },
-
-  pickers = {
-    lsp_code_actions = { theme = 'cursor' },
   },
 
   extensions = {
