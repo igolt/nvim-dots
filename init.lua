@@ -31,10 +31,6 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit           = 1
 vim.g.loaded_matchparen        = 1
 
--- exclusively use `filetype.lua` for filetype matching
-vim.g.do_filetype_lua    = 1
-vim.g.did_load_filetypes = 0
-
 req('core.options')
 req('core.colorscheme')
 req('core.plugins')

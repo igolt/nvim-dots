@@ -96,6 +96,11 @@ packer.startup(function(use)
   }
 
   -- UI
+  use {
+    'stevearc/dressing.nvim',
+    config = load_config('dressing'),
+    -- after = 'telescope.nvim',
+  }
   use('rcarriga/nvim-notify')
   use {
     'goolord/alpha-nvim',
