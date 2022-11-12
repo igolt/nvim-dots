@@ -47,7 +47,7 @@ M.setup = function()
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
         augroup LspDocumentHighligh
@@ -92,10 +92,6 @@ end
 M.on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  if client.name == 'tsserver' then
-    client.resolved_capabilities.document_formatting = false
-  end
-
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
@@ -104,7 +100,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if ok then
-  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
 
 M.capabilities = capabilities

@@ -1,7 +1,9 @@
 local data_dir = require('core.global').data_dir
-local sumneko_root_path = data_dir .. '/lsp/servers/lua-language-server'
+local servers_dir = data_dir .. '/lsp/servers'
+local sumneko_root_path = servers_dir .. '/lua-language-server'
 local sumneko_binary = sumneko_root_path .. '/bin/Linux/lua-language-server'
 local sumneko_main = sumneko_root_path .. '/main.lua'
+local jlsbin = servers_dir .. '/java-language-server/dist/lang_server_linux.sh'
 local null_ls = require('null-ls')
 local default_on_attach = require('plugins.lspconfig.handlers').on_attach
 local default_capabilities = require('plugins.lspconfig.handlers').capabilities
@@ -19,6 +21,15 @@ local eslint_d_config = {
     return utils.root_has_file(eslint { 'js', 'yml', 'json' })
   end,
 }
+
+-- Let null_ls handle formatting
+local function null_ls_format_on_save(client)
+  client.server_capabilities.document_formatting = false
+  client.server_capabilities.document_range_formatting = false
+
+  -- Format on save
+  vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format()')
+end
 
 null_ls.setup {
   sources = {
@@ -42,6 +53,8 @@ local servers = {
       '--header-insertion=iwyu',
     },
   },
+
+  java_language_server = { cmd = { jlsbin } },
 
   sumneko_lua = {
     cmd = { sumneko_binary, '-E', sumneko_main },
@@ -68,13 +81,7 @@ local servers = {
     },
 
     on_attach = function(client, bufnr)
-      -- Let null_ls handle formatting
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-
-      -- Format on save
-      vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
-
+      null_ls_format_on_save(client)
       default_on_attach(client, bufnr)
     end,
   },
@@ -93,13 +100,7 @@ local servers = {
       -- required to fix code action ranges and filter diagnostics
       ts_utils.setup_client(client)
 
-      -- Let null_ls handle formatting
-      client.resolved_capabilities.document_formatting = false
-      client.resolved_capabilities.document_range_formatting = false
-
-      -- Format on save
-      vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
-
+      null_ls_format_on_save(client)
       default_on_attach(client, bufnr)
     end,
   },
