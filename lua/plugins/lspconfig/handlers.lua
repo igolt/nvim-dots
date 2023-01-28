@@ -1,5 +1,5 @@
 local M = {}
-local map = require('core.mappings')
+local map = require('lib.keymap')
 
 M.setup = function()
   local signs = {

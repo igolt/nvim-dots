@@ -1,15 +1,4 @@
-local default_opts = { noremap = true, silent = true }
-
-local function set_keymap(mode, lhs, rhs, opts)
-  opts = opts or default_opts
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-local function buf_set_keymap(buffer, mode, lhs, rhs, opts)
-  opts = opts or { noremap = true, silent = true }
-  opts.buffer = buffer
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
+local set_keymap = require('lib.keymap').set_keymap
 
 local mapleader = require('user.config').mapleader or ' '
 local maplocalleader = require('user.config').maplocalleader or ' '
@@ -116,8 +105,3 @@ set_keymap('n', '<leader>zm', '<cmd>ZenMode<cr>')
 -- Packer
 set_keymap('n', '<leader>ps', '<cmd>PackerSync<cr>')
 set_keymap('n', '<leader>pc', '<cmd>PackerCompile<cr>')
-
-return {
-  set_keymap = set_keymap,
-  buf_set_keymap = buf_set_keymap,
-}
