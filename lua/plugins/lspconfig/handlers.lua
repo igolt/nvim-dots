@@ -67,6 +67,10 @@ local function lsp_keymaps(bufnr)
     map.buf_set_keymap(bufnr, ...)
   end
 
+  local function async_formatting()
+    vim.lsp.buf.format { async = true }
+  end
+
   -- Mappings
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
   buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>')
@@ -81,12 +85,7 @@ local function lsp_keymaps(bufnr)
   buf_set_keymap('n', '<leader>d', vim.diagnostic.open_float)
   buf_set_keymap('n', '[d', vim.diagnostic.goto_prev)
   buf_set_keymap('n', ']d', vim.diagnostic.goto_next)
-  buf_set_keymap('n', '<leader>f', vim.lsp.buf.formatting)
-  buf_set_keymap(
-    'x',
-    '<leader>f',
-    ':lua vim.lsp.buf.range_formatting({tabSize = vim.o.ts})<CR>'
-  )
+  buf_set_keymap('n', '<leader>f', async_formatting)
 end
 
 M.on_attach = function(client, bufnr)
