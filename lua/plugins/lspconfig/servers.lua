@@ -105,6 +105,7 @@ local servers = {
     end,
   },
 
+  hls = { single_file_support = true },
   html = {},
   cssls = {},
   vimls = {},
