@@ -1,5 +1,5 @@
-local ok, notify = pcall(require, 'notify')
-if ok then vim.notify = notify end
+local vim_notify_is_loaded, notify = pcall(require, 'notify')
+if vim_notify_is_loaded then vim.notify = notify end
 
 Warn  = function (msg, opts) vim.notify(msg, "warn", opts) end
 Error = function (msg, opts) vim.notify(msg, "error", opts) end
