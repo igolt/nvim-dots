@@ -9,6 +9,10 @@ require('nvim-tree').setup {
   filters = { custom = { '.git' } },
   actions = { open_file = { resize_window = true } },
 
+  notify = {
+    threshold = vim.log.levels.WARN,
+  },
+
   git = {
     enable = true,
     ignore = false,
