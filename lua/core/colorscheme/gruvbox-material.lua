@@ -1,22 +1,16 @@
 local cmd = vim.cmd
 
-local function fg(group, col)
-  cmd('hi ' .. group .. ' guifg=' .. col)
-end
-
 local function fg_bg(group, fgcol, bgcol)
   cmd('hi ' .. group .. ' guifg=' .. fgcol .. ' guibg=' .. bgcol)
 end
 
-local function bg (group, col)
+local function bg(group, col)
   cmd('hi ' .. group .. ' guibg=' .. col)
 end
 
 vim.g.gruvbox_material_show_eob = 0
 vim.g.gruvbox_material_sign_column_background = 'none'
 vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
-
-cmd([[colorscheme gruvbox-material]])
 
 local darker_black = '#202020'
 local black2 = '#32302f'
@@ -39,11 +33,6 @@ fg_bg('TelescopePromptTitle', black, red)
 fg_bg('TelescopeResultsTitle', darker_black, darker_black)
 
 bg('TelescopeSelection', black2)
-
--- NvimTree
-fg('NvimTreeEndOfBuffer', darker_black)
-bg('NvimTreeNormal', darker_black)
-bg('NvimTreeNormalNC', darker_black)
 
 -- Floating windows
 bg('NormalFloat', black)
