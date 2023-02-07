@@ -1,6 +1,8 @@
 local data_dir = require('core.global').data_dir
-local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
 local local_plugins_dir = require('core.global').local_plugins_dir
+
+local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
+local packer_augroup = 'PackerUserConfig'
 local packer_bootstrap = false
 
 if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
@@ -18,8 +20,8 @@ if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
   vim.cmd('packadd packer.nvim')
 end
 
-local ok, packer = pcall(require, 'packer')
-if not ok then
+local packer_loaded, packer = pcall(require, 'packer')
+if not packer_loaded then
   Warn('Could not load packer')
   return
 end
@@ -33,12 +35,12 @@ packer.init {
   },
 }
 
-vim.cmd([[
-  augroup PackerUserConfig
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup END
-]])
+vim.api.nvim_create_augroup(packer_augroup, {})
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = 'plugins.lua',
+  command = 'source <afile> | PackerSync',
+  group = packer_augroup,
+})
 
 local function load_config(config)
   local modname = 'plugins.' .. config
@@ -131,7 +133,7 @@ packer.startup(function(use)
   use { 'junegunn/vim-easy-align', config = load_config('easy_align') }
 
   use { 'folke/zen-mode.nvim', cmd = 'ZenMode' }
-  use { 'numToStr/BufOnly.nvim', cmd = 'BufOnly' }
+  use { 'vim-scripts/BufOnly.vim', cmd = 'BufOnly' }
   use { 'akinsho/nvim-toggleterm.lua', config = load_config('toggleterm') }
 
   use('jghauser/mkdir.nvim')
