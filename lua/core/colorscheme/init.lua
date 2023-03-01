@@ -1,6 +1,8 @@
 local colorscheme = require('user.config').colorscheme
 
 if colorscheme ~= nil then
-  pcall(require, 'core.colorscheme.' .. colorscheme)
-  vim.cmd.colorscheme(colorscheme)
+  local has_config, _ = pcall(require, 'core.colorscheme.' .. colorscheme)
+  if not has_config then
+    vim.cmd.colorscheme(colorscheme)
+  end
 end

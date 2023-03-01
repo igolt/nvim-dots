@@ -19,6 +19,8 @@ local white = '#d4be98'
 local red = '#ea6962'
 local green = '#a9b665'
 
+vim.cmd.colorscheme('gruvbox-material')
+
 -- Telescope
 fg_bg('TelescopeBorder', darker_black, darker_black)
 fg_bg('TelescopePromptBorder', black2, black2)

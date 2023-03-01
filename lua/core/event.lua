@@ -1,9 +1,3 @@
-local autocmd = vim.api.nvim_create_autocmd
-
-local function highlight_on_yank()
-  vim.highlight.on_yank { higroup = 'Visual' }
-end
-
 local definitions = {
   bufs = {
     {
@@ -38,7 +32,14 @@ local definitions = {
   },
 
   yank = {
-    { 'TextYankPost', { callback = highlight_on_yank } },
+    {
+      'TextYankPost',
+      {
+        callback = function()
+          vim.highlight.on_yank { higroup = 'Visual' }
+        end,
+      },
+    },
   },
 }
 
@@ -47,6 +48,6 @@ for group_name, definition in pairs(definitions) do
 
   for _, def in ipairs(definition) do
     def[2].group = group_name
-    autocmd(def[1], def[2])
+    vim.api.nvim_create_autocmd(def[1], def[2])
   end
 end
