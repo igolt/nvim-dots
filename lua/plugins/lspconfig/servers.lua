@@ -1,9 +1,3 @@
-local data_dir = require('core.global').data_dir
-local servers_dir = data_dir .. '/lsp/servers'
-local sumneko_root_path = servers_dir .. '/lua-language-server'
-local sumneko_binary = sumneko_root_path .. '/bin/Linux/lua-language-server'
-local sumneko_main = sumneko_root_path .. '/main.lua'
-local jlsbin = servers_dir .. '/java-language-server/dist/lang_server_linux.sh'
 local null_ls = require('null-ls')
 local default_on_attach = require('plugins.lspconfig.handlers').on_attach
 local default_capabilities = require('plugins.lspconfig.handlers').capabilities
@@ -53,13 +47,13 @@ local servers = {
       '--header-insertion=iwyu',
     },
   },
-
-  java_language_server = { cmd = { jlsbin } },
-
-  sumneko_lua = {
-    cmd = { sumneko_binary, '-E', sumneko_main },
+  lua_ls = {
     settings = {
       Lua = {
+        runtime = {
+          version = 'LuaJIT',
+        },
+
         diagnostics = {
           globals = {
             'screen',
@@ -85,7 +79,6 @@ local servers = {
       default_on_attach(client, bufnr)
     end,
   },
-
   tsserver = {
     single_file_support = true,
 
@@ -104,14 +97,12 @@ local servers = {
       default_on_attach(client, bufnr)
     end,
   },
-
-  hls = { single_file_support = true },
   html = {},
   cssls = {},
   vimls = {},
   jsonls = {},
   pyright = {},
-  intelephense = {},
+  intelephense = { single_file_support = true },
   rust_analyzer = {},
 }
 
