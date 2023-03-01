@@ -79,6 +79,7 @@ packer.startup(function(use)
   use { 'windwp/nvim-autopairs', config = load_config('autopairs') }
 
   -- LSP
+  use { "williamboman/mason.nvim", config = load_config('mason') }
   use { 'neovim/nvim-lspconfig', config = load_config('lspconfig') }
   use('jose-elias-alvarez/null-ls.nvim')
   use('jose-elias-alvarez/nvim-lsp-ts-utils')
@@ -98,16 +99,9 @@ packer.startup(function(use)
   }
 
   -- UI
-  use {
-    'stevearc/dressing.nvim',
-    config = load_config('dressing'),
-    -- after = 'telescope.nvim',
-  }
+  use { 'stevearc/dressing.nvim', config = load_config('dressing') }
   use('rcarriga/nvim-notify')
-  use {
-    'goolord/alpha-nvim',
-    config = load_config('alpha'),
-  }
+  use { 'goolord/alpha-nvim', config = load_config('alpha') }
   use { 'folke/todo-comments.nvim', config = load_config('todo-comments') }
 
   -- colorschemes
@@ -171,6 +165,8 @@ packer.startup(function(use)
     run = 'cd app && yarn install',
     config = load_config('markdown-preview'),
   }
+
+  use { 'manzeloth/live-server', ft = 'html' }
 
   -- Treesitter
   use {
