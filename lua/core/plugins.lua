@@ -1,11 +1,9 @@
-local data_dir = require('core.global').data_dir
-local local_plugins_dir = require('core.global').local_plugins_dir
+local DATA_PATH         = vim.fn.stdpath('data') .. '/site'
+local PACKER_AUGROUP    = 'PackerUserConfig'
+local PACKER_DIR        = DATA_PATH .. '/pack/packer/start/packer.nvim'
 
-local packer_dir = data_dir .. '/pack/packer/start/packer.nvim'
-local packer_augroup = 'PackerUserConfig'
-local packer_bootstrap = false
-
-if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
+local packer_bootstrap  = false
+if vim.fn.empty(vim.fn.glob(PACKER_DIR)) > 0 then
   vim.notify('Installing packer...')
 
   packer_bootstrap = vim.fn.system {
@@ -14,14 +12,14 @@ if vim.fn.empty(vim.fn.glob(packer_dir)) > 0 then
     '--depth',
     '1',
     'https://github.com/wbthomason/packer.nvim',
-    packer_dir,
+    PACKER_DIR,
   }
 
   vim.cmd('packadd packer.nvim')
 end
 
-local packer_loaded, packer = pcall(require, 'packer')
-if not packer_loaded then
+local packer_is_loaded, packer = pcall(require, 'packer')
+if not packer_is_loaded then
   Warn('Could not load packer')
   return
 end
@@ -35,11 +33,11 @@ packer.init {
   },
 }
 
-vim.api.nvim_create_augroup(packer_augroup, {})
+vim.api.nvim_create_augroup(PACKER_AUGROUP, {})
 vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = 'plugins.lua',
   command = 'source <afile> | PackerSync',
-  group = packer_augroup,
+  group = PACKER_AUGROUP,
 })
 
 local function load_config(config)
@@ -79,7 +77,7 @@ packer.startup(function(use)
   use { 'windwp/nvim-autopairs', config = load_config('autopairs') }
 
   -- LSP
-  use { "williamboman/mason.nvim", config = load_config('mason') }
+  use { 'williamboman/mason.nvim', config = load_config('mason') }
   use { 'neovim/nvim-lspconfig', config = load_config('lspconfig') }
   use('jose-elias-alvarez/null-ls.nvim')
   use('jose-elias-alvarez/nvim-lsp-ts-utils')
@@ -90,11 +88,7 @@ packer.startup(function(use)
     cmd = 'Telescope',
     module = 'telescope',
     requires = {
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = 'make',
-        opt = true,
-      },
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', opt = true },
     },
   }
 
@@ -109,7 +103,6 @@ packer.startup(function(use)
   use('LunarVim/Colorschemes')
   use('Mofiqul/dracula.nvim')
   use('sainnhe/gruvbox-material')
-  use(local_plugins_dir .. '/gruvbox-material.nvim')
 
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -119,7 +112,7 @@ packer.startup(function(use)
   use { 'feline-nvim/feline.nvim', config = load_config('feline') }
 
   use { 'kyazdani42/nvim-tree.lua', config = load_config('nvim-tree') }
-  use { 'norcalli/nvim-colorizer.lua', config = load_config('colorizer') }
+  use { 'uga-rosa/ccc.nvim', config = load_config('ccc') }
   use { 'akinsho/nvim-bufferline.lua', config = load_config('bufferline') }
 
   -- Editor plugins
@@ -148,10 +141,7 @@ packer.startup(function(use)
 
   -- Git
   use('tpope/vim-fugitive')
-  use {
-    'lewis6991/gitsigns.nvim',
-    config = load_config('gitsigns'),
-  }
+  use { 'lewis6991/gitsigns.nvim', config = load_config('gitsigns') }
 
   -- filetype plugins
   use('lervag/vimtex')

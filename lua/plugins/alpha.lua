@@ -368,4 +368,12 @@ local headers = {
   },
 }
 
-return headers
+vim.cmd(
+  [[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]]
+)
+
+local dashboard = require('alpha.themes.dashboard')
+
+dashboard.section.header.val = headers['heart-pirates']
+
+require('alpha').setup(dashboard.config)

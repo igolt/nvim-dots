@@ -56,28 +56,24 @@ local servers = {
 
         diagnostics = {
           globals = {
-            'screen',
-            'root',
-            'client',
             'vim',
             'packer_plugins',
-            'awesome',
           },
         },
 
         workspace = {
           library = {
             [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [require('core.global').vim_path .. '/lua'] = true,
+            [USER_CONFIG_PATH .. '/lua'] = true,
           },
         },
       },
     },
 
-    on_attach = function(client, bufnr)
-      null_ls_format_on_save(client)
-      default_on_attach(client, bufnr)
-    end,
+    -- on_attach = function(client, bufnr)
+    --   -- null_ls_format_on_save(client)
+    --   default_on_attach(client, bufnr)
+    -- end,
   },
   tsserver = {
     single_file_support = true,
@@ -97,12 +93,13 @@ local servers = {
       default_on_attach(client, bufnr)
     end,
   },
+  jdtls = {},
   html = {},
   cssls = {},
   vimls = {},
   jsonls = {},
   pyright = {},
-  intelephense = { single_file_support = true },
+  phpactor = {},
   rust_analyzer = {},
 }
 
@@ -114,11 +111,9 @@ local set_if_abscent = function(table, field, value)
   end
 end
 
-for server, config in pairs(servers) do
+for server_name, config in pairs(servers) do
   set_if_abscent(config, 'on_attach', default_on_attach)
   set_if_abscent(config, 'capabilities', default_capabilities)
 
-  lspconfig[server].setup(config)
+  lspconfig[server_name].setup(config)
 end
-
-return servers

@@ -1,7 +1,7 @@
 local telescope = require('telescope')
 local mappings = {
   ['<C-x>'] = false,
-  ['<C-h>'] = require('telescope.actions').select_vertical,
+  ['<C-h>'] = require('telescope.actions').select_horizontal,
 }
 
 require('packer').loader('telescope-fzf-native.nvim')

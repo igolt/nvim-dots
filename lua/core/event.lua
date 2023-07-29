@@ -43,11 +43,13 @@ local definitions = {
   },
 }
 
-for group_name, definition in pairs(definitions) do
-  vim.api.nvim_create_augroup(group_name, {})
+for augroup, autocmd_list in pairs(definitions) do
+  vim.api.nvim_create_augroup(augroup, {})
 
-  for _, def in ipairs(definition) do
-    def[2].group = group_name
-    vim.api.nvim_create_autocmd(def[1], def[2])
+  for _, autocmd in ipairs(autocmd_list) do
+    local event, options = autocmd[1], autocmd[2]
+
+    options.group = augroup
+    vim.api.nvim_create_autocmd(event, options)
   end
 end

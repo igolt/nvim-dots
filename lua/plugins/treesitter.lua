@@ -16,7 +16,7 @@ require('nvim-treesitter.configs').setup {
   highlight = { enable = true },
   indent = {
     enable = true,
-    disable = { 'lua', 'c', 'cpp', 'html' },
+    disable = { 'lua', 'c', 'cpp', 'html', 'php' },
   },
   textobjects = {
     select = {
@@ -28,6 +28,8 @@ require('nvim-treesitter.configs').setup {
         ['if'] = '@function.inner',
         ['ic'] = '@comment.inner',
         ['ac'] = '@comment.outer',
+        ['iC'] = '@class.inner',
+        ['aC'] = '@class.outer',
       },
     },
   },

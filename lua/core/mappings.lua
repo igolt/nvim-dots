@@ -32,7 +32,7 @@ set_keymap('n', '<C-l>', ':wincmd l<cr>')
 set_keymap('n', '<leader>e', ':e<Space>', noremap)
 set_keymap('n', '<leader>v', ':vsplit<Space>', noremap)
 
-set_keymap('n', '<leader>w', '<cmd>w<cr>')
+set_keymap('n', '<leader>w', '<cmd>silent w<cr>')
 set_keymap('n', '<leader>q', '<cmd>q<cr>')
 set_keymap('n', '<leader>fq', '<cmd>qa<cr>')
 set_keymap('n', 'du', '0D')

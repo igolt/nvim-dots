@@ -1,14 +1,17 @@
-local vim_notify_is_loaded, notify = pcall(require, 'notify')
-if vim_notify_is_loaded then vim.notify = notify end
+local notify_is_loaded, notify = pcall(require, 'notify')
+if notify_is_loaded then
+  vim.notify = notify
+end
 
-Warn  = function (msg, opts) vim.notify(msg, "warn", opts) end
-Error = function (msg, opts) vim.notify(msg, "error", opts) end
+Warn  = function (msg, opts) vim.notify(msg, vim.log.levels.WARN, opts) end
+Error = function (msg, opts) vim.notify(msg, vim.log.levels.ERROR, opts) end
 
-local function req(module)
-  local status_ok, res = pcall(require, module)
+local function load_if_possible_or_warn(module)
+  local loaded_successfully = pcall(require, module)
 
-  if status_ok then return res end
-  Warn(("Could not load module `%s`"):format(module))
+  if not loaded_successfully then
+    Warn(("Could not load module `%s`"):format(module))
+  end
 end
 
 -- Disable distribution plugins
@@ -31,8 +34,9 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit           = 1
 vim.g.loaded_matchparen        = 1
 
-req('core.options')
-req('core.colorscheme')
-req('core.plugins')
-req('core.event')
-req('core.mappings')
+load_if_possible_or_warn('core.globals')
+load_if_possible_or_warn('core.options')
+load_if_possible_or_warn('core.colorscheme')
+load_if_possible_or_warn('core.plugins')
+load_if_possible_or_warn('core.event')
+load_if_possible_or_warn('core.mappings')

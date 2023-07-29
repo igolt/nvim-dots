@@ -3,10 +3,10 @@ local map = require('lib.keymap')
 
 M.setup = function()
   local signs = {
-    { name = 'DiagnosticSignError', text = ' ' },
-    { name = 'DiagnosticSignWarn', text = ' ' },
-    { name = 'DiagnosticSignInfo', text = ' ' },
-    { name = 'DiagnosticSignHint', text = ' ' },
+    { name = 'DiagnosticSignError', text = '' },
+    { name = 'DiagnosticSignWarn', text = '' },
+    { name = 'DiagnosticSignInfo', text = '' },
+    { name = 'DiagnosticSignHint', text = '󰌶' },
   }
 
   for _, sign in ipairs(signs) do
@@ -16,10 +16,8 @@ M.setup = function()
     )
   end
 
-  local config = {
+  local diagnostic_config = {
     virtual_text = true,
-
-    signs = { active = signs },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -33,7 +31,7 @@ M.setup = function()
     },
   }
 
-  vim.diagnostic.config(config)
+  vim.diagnostic.config(diagnostic_config)
 
   vim.lsp.handlers['textDocument/hover'] =
     vim.lsp.with(vim.lsp.handlers.hover, {
@@ -62,7 +60,7 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function lsp_keymaps(bufnr)
+local function set_lsp_keymaps_for_buf(bufnr)
   local function buf_set_keymap(...)
     map.buf_set_keymap(bufnr, ...)
   end
@@ -91,7 +89,7 @@ end
 M.on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  lsp_keymaps(bufnr)
+  set_lsp_keymaps_for_buf(bufnr)
   lsp_highlight_document(client)
 end
 

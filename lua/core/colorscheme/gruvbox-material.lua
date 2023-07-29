@@ -4,6 +4,10 @@ local function fg_bg(group, fgcol, bgcol)
   cmd('hi ' .. group .. ' guifg=' .. fgcol .. ' guibg=' .. bgcol)
 end
 
+local function fg(group, col)
+  cmd('hi ' .. group .. ' guifg=' .. col)
+end
+
 local function bg(group, col)
   cmd('hi ' .. group .. ' guibg=' .. col)
 end
@@ -35,6 +39,9 @@ fg_bg('TelescopePromptTitle', black, red)
 fg_bg('TelescopeResultsTitle', darker_black, darker_black)
 
 bg('TelescopeSelection', black2)
+
+-- Fidget
+fg('FidgetTask', white)
 
 -- Floating windows
 bg('NormalFloat', black)
