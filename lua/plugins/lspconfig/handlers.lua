@@ -17,8 +17,8 @@ M.setup = function()
   end
 
   local diagnostic_config = {
-    virtual_text = true,
-    update_in_insert = true,
+    virtual_text = false,
+    update_in_insert = false,
     underline = true,
     severity_sort = true,
     float = {
