@@ -80,8 +80,9 @@ packer.startup(function(use)
   use { 'williamboman/mason.nvim', config = load_config('mason') }
   use { 'neovim/nvim-lspconfig', config = load_config('lspconfig') }
   use('jose-elias-alvarez/null-ls.nvim')
-  use('jose-elias-alvarez/nvim-lsp-ts-utils')
+  use('jose-elias-alvarez/typescript.nvim')
 
+  -- Fuzzy finder
   use {
     'nvim-telescope/telescope.nvim',
     config = load_config('telescope'),
@@ -99,9 +100,6 @@ packer.startup(function(use)
   use { 'folke/todo-comments.nvim', config = load_config('todo-comments') }
 
   -- colorschemes
-  use('folke/tokyonight.nvim')
-  use('LunarVim/Colorschemes')
-  use('Mofiqul/dracula.nvim')
   use('sainnhe/gruvbox-material')
 
   use {
@@ -155,8 +153,6 @@ packer.startup(function(use)
     run = 'cd app && yarn install',
     config = load_config('markdown-preview'),
   }
-
-  use { 'manzeloth/live-server', ft = 'html' }
 
   -- Treesitter
   use {

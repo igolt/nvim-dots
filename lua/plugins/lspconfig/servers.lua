@@ -32,12 +32,11 @@ null_ls.setup {
     null_ls.builtins.diagnostics.eslint_d.with(eslint_d_config),
 
     null_ls.builtins.formatting.prettierd,
-
-    null_ls.builtins.formatting.stylua,
+    require('typescript.extensions.null-ls.code-actions')
   },
 }
 
-local servers = {
+local servers_configuration = {
   clangd = {
     cmd = {
       'clangd',
@@ -69,29 +68,6 @@ local servers = {
         },
       },
     },
-
-    -- on_attach = function(client, bufnr)
-    --   -- null_ls_format_on_save(client)
-    --   default_on_attach(client, bufnr)
-    -- end,
-  },
-  tsserver = {
-    single_file_support = true,
-
-    on_attach = function(client, bufnr)
-      local ts_utils = require('nvim-lsp-ts-utils')
-
-      ts_utils.setup {
-        import_all_timeout = 2000, -- ms
-        auto_inlay_hints = false,
-      }
-
-      -- required to fix code action ranges and filter diagnostics
-      ts_utils.setup_client(client)
-
-      null_ls_format_on_save(client)
-      default_on_attach(client, bufnr)
-    end,
   },
   jdtls = {},
   html = {},
@@ -111,9 +87,18 @@ local set_if_abscent = function(table, field, value)
   end
 end
 
-for server_name, config in pairs(servers) do
+for server_name, config in pairs(servers_configuration) do
   set_if_abscent(config, 'on_attach', default_on_attach)
   set_if_abscent(config, 'capabilities', default_capabilities)
 
   lspconfig[server_name].setup(config)
 end
+
+require('typescript').setup {
+  server = {
+    on_attach = function (client, bufnr)
+      null_ls_format_on_save(client)
+      default_on_attach(client, bufnr)
+    end
+  }
+}
