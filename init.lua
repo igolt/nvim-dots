@@ -36,7 +36,7 @@ vim.g.loaded_matchparen        = 1
 
 load_if_possible_or_warn('core.globals')
 load_if_possible_or_warn('core.options')
-load_if_possible_or_warn('core.colorscheme')
-load_if_possible_or_warn('core.plugins')
 load_if_possible_or_warn('core.event')
 load_if_possible_or_warn('core.mappings')
+load_if_possible_or_warn('core.colorscheme')
+load_if_possible_or_warn('core.plugins')

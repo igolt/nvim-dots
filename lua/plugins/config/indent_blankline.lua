@@ -1,3 +1,5 @@
+require('ibl').setup({ scope = { enabled = false } })
+
 vim.cmd([[nnoremap <leader><leader>i <cmd>IndentBlanklineToggle<cr>]])
 vim.g.indent_blankline_char = '│'
 vim.g.indent_blankline_show_first_indent_level = true

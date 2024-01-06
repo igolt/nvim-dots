@@ -1,6 +1,5 @@
 require('nvim-treesitter.configs').setup {
   playground = { enable = true },
-  context_commentstring = { enable = true },
   ensure_installed = {
     'c',
     'cpp',

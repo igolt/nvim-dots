@@ -4,8 +4,6 @@ local mappings = {
   ['<C-h>'] = require('telescope.actions').select_horizontal,
 }
 
-require('packer').loader('telescope-fzf-native.nvim')
-
 telescope.setup {
   defaults = {
     mappings = {

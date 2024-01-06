@@ -1,5 +1,5 @@
 local vi_mode_utils = require('feline.providers.vi_mode')
-local providers = require('plugins.feline.providers')
+local providers = require('plugins.config.feline.providers')
 
 local function with_sep(component_info)
   component_info.right_sep = ' '

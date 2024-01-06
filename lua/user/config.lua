@@ -1,6 +1,6 @@
 return {
   mapleader = ' ',
   maplocalleader = ' ',
-  colorscheme = 'gruvbox-material',
+  colorscheme = 'tokyonight-night',
   statusline = { preset = 'blocks' },
 }

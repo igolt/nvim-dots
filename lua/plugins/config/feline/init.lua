@@ -7,7 +7,7 @@ end
 
 local preset = stlineconfig.preset
 
-local ok, config = pcall(require, 'plugins.feline.presets.' .. preset)
+local ok, config = pcall(require, 'plugins.config.feline.presets.' .. preset)
 if ok then
   if config.theme == nil and vim.g.colors_name then
     local theme

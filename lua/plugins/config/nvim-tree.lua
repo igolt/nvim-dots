@@ -12,7 +12,6 @@ local function on_attach(bufnr)
     }
   end
 
-  keymap.set('n', '<C-]>',           api.tree.change_root_to_node,        opts('CD'))
   keymap.set('n', '<C-e>',           api.node.open.replace_tree_buffer,   opts('Open: In Place'))
   keymap.set('n', '<C-k>',           api.node.show_info_popup,            opts('Info'))
   keymap.set('n', '<C-r>',           api.fs.rename_sub,                   opts('Rename: Omit Filename'))
@@ -29,7 +28,6 @@ local function on_attach(bufnr)
   keymap.set('n', '>',               api.node.navigate.sibling.next,      opts('Next Sibling'))
   keymap.set('n', '<',               api.node.navigate.sibling.prev,      opts('Previous Sibling'))
   keymap.set('n', '.',               api.node.run.cmd,                    opts('Run Command'))
-  keymap.set('n', '<C-[>',           api.tree.change_root_to_parent,      opts('Up'))
   keymap.set('n', 'a',               api.fs.create,                       opts('Create'))
   keymap.set('n', 'bmv',             api.marks.bulk.move,                 opts('Move Bookmarked'))
   keymap.set('n', 'B',               api.tree.toggle_no_buffer_filter,    opts('Toggle No Buffer'))
@@ -70,7 +68,7 @@ local function on_attach(bufnr)
 end
 
 require('nvim-tree').setup {
-  sort_by = 'case_sensitve',
+  sort_by = 'case_sensitive',
   disable_netrw = true,
   hijack_cursor = true,
   open_on_tab = true,

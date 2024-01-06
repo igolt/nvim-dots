@@ -1,6 +1,6 @@
 local null_ls = require('null-ls')
-local default_on_attach = require('plugins.lspconfig.handlers').on_attach
-local default_capabilities = require('plugins.lspconfig.handlers').capabilities
+local default_on_attach = require('plugins.config.lspconfig.handlers').on_attach
+local default_capabilities = require('plugins.config.lspconfig.handlers').capabilities
 
 local eslint_d_config = {
   condition = function(utils)
@@ -30,8 +30,13 @@ null_ls.setup {
     null_ls.builtins.code_actions.eslint_d.with(eslint_d_config),
     null_ls.builtins.formatting.eslint_d.with(eslint_d_config),
     null_ls.builtins.diagnostics.eslint_d.with(eslint_d_config),
-
     null_ls.builtins.formatting.prettierd,
+
+    null_ls.builtins.formatting.black.with {
+      extra_args = {"--experimental-string-processing"}
+    },
+    null_ls.builtins.formatting.ruff,
+    null_ls.builtins.diagnostics.ruff,
     require('typescript.extensions.null-ls.code-actions')
   },
 }
@@ -74,16 +79,32 @@ local servers_configuration = {
   cssls = {},
   vimls = {},
   jsonls = {},
-  pyright = {},
+  pyright = {
+    on_attach = function (client, bufnr)
+      null_ls_format_on_save(client)
+      default_on_attach(client, bufnr)
+    end,
+
+    settings ={
+      python = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "openFilesOnly",
+          useLibraryCodeForTypes = true,
+          typeCheckingMode = 'strict'
+        }
+      }
+    },
+  },
   phpactor = {},
   rust_analyzer = {},
 }
 
 local lspconfig = require('lspconfig')
 
-local set_if_abscent = function(table, field, value)
-  if not table[field] then
-    table[field] = value
+local set_if_abscent = function(t, field, value)
+  if not t[field] then
+    t[field] = value
   end
 end
 
