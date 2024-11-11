@@ -1,25 +1,20 @@
 require('nvim-treesitter.configs').setup {
   playground = { enable = true },
-  -- ensure_installed = {
-  --   'c',
-  --   'cpp',
-  --   'html',
-  --   'javascript',
-  --   'lua',
-  --   'php',
-  --   'python',
-  --   'rasi',
-  --   'tsx',
-  --   'typescript',
-  -- },
+  ensure_installed = {
+    'c',
+    'cpp',
+    'html',
+    'javascript',
+    'lua',
+    'php',
+    'python',
+    'rasi',
+    'tsx',
+    'typescript',
+  },
   highlight = { enable = true },
-  indent = {
-    enable = true,
-    disable = { 'lua', 'c', 'cpp', 'html', 'php' },
-  },
-  endwise = {
-    enable = true,
-  },
+  indent = { enable = true },
+  endwise = { enable = true },
   textobjects = {
     select = {
       enable = true,

@@ -31,6 +31,7 @@ local servers = {
   cssls = {},
   vimls = {},
   jsonls = {},
+  ruff = {},
   pyright = {
     settings = {
       python = {

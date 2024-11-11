@@ -10,7 +10,7 @@ Error = function(msg, opts) vim.notify(msg, vim.log.levels.ERROR, opts) end
 local function try_load(module)
   local ok, err = pcall(require, module)
   if not ok then
-    Warn(('Could not load module `%s`: %s'):format(module, err))
+    Warn(('Could not load module %q: %s'):format(module, err))
   end
 end
 

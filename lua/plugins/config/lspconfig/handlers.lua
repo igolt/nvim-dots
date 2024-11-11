@@ -15,7 +15,7 @@ M.setup = function()
     )
   end
 
-  local diagnostic_config = {
+  vim.diagnostic.config {
     virtual_text = false,
     update_in_insert = false,
     underline = true,
@@ -24,13 +24,11 @@ M.setup = function()
       focusable = false,
       style = 'minimal',
       border = 'rounded',
-      source = 'always',
+      source = true,
       header = '',
       prefix = '',
     },
   }
-
-  vim.diagnostic.config(diagnostic_config)
 
   vim.lsp.handlers['textDocument/hover'] =
     vim.lsp.with(vim.lsp.handlers.hover, {
@@ -64,7 +62,6 @@ end
 M.on_attach = function(_, bufnr) set_lsp_keymaps_for_buf(bufnr) end
 
 local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-
 ---@type lsp.ClientCapabilities?
 M.capabilities = ok and cmp_nvim_lsp.default_capabilities() or nil
 
