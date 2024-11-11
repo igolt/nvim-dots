@@ -40,11 +40,10 @@ M.diagnostics_to_qf_list = function(path)
         type = diag.severity == 'error' and 'E' or 'W',
       })
     end
-    vim.schedule(
-      function()
-        vim.fn.setqflist({}, 'r', { title = 'Pyright', items = qf_items })
-      end
-    )
+    vim.schedule(function()
+      vim.fn.setqflist({}, 'r', { title = 'Pyright', items = qf_items })
+      vim.cmd('copen')
+    end)
   end)
 end
 
