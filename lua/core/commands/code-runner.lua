@@ -17,9 +17,18 @@ local code_runner = function(cmd)
   end
 end
 
+local code_runners = {
+  python = code_runner('python'),
+  lua = code_runner('lua'),
+  javascript = code_runner('node'),
+}
+
 return {
-  python_code_runner = code_runner('python'),
-  c_code_runner = code_runner('. ~/.config/bash/functions; csource'),
-  cpp_code_runner = code_runner('. ~/.config/bash/functions; cppsource'),
-  node_code_runner = code_runner('node'),
+  run = function()
+    local ft = vim.bo.filetype
+    local runner = code_runners[ft]
+    if runner then
+      runner()
+    end
+  end,
 }

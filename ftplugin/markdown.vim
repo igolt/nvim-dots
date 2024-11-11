@@ -4,6 +4,6 @@ setlocal spell
 setlocal tabstop=2
 setlocal formatexpr=o " set to 'o' so it's not overridden by lsp.formatexpr
 
-nnoremap <buffer><leader>rc <cmd>MarkdownPreview<cr>
+nnoremap <buffer><leader>rc <Cmd>MarkdownPreview<Cr>
 nnoremap <buffer><silent>= gq
 nnoremap <buffer><silent>== gql

@@ -38,6 +38,7 @@ try_load('core.options')
 try_load('core.mappings')
 try_load('core.event')
 try_load('core.plugins')
+try_load('core.commands')
 
 local colorscheme = require('config').colorscheme or 'default'
 local ok, err = pcall(vim.cmd.colorscheme, colorscheme)

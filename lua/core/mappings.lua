@@ -8,14 +8,14 @@ vim.g.maplocalleader = maplocalleader
 -- Disable 'Switch to Ex mode' mapping
 vim.keymap.set('n', 'Q', '<Nop>')
 
--- Map CTRL-[ to ESC
-vim.keymap.set('n', '<C-[>', '<Esc>', { remap = true })
-
 -- Disable highlight search
 vim.keymap.set('n', '<Esc>', '<Cmd>noh<CR>')
 
 -- Open URL under cursor
 vim.keymap.set('n', 'gx', '<Cmd>VisitLinkUnderCursor<CR>')
+
+-- Code runner
+vim.keymap.set('n', '<leader>rc', '<Cmd>RunCode<CR>')
 
 --  Window navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h')
@@ -93,7 +93,12 @@ vim.keymap.set('n', '<leader>b', '<Cmd>Telescope buffers<CR>')
 vim.keymap.set('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>')
 vim.keymap.set('n', '\\', '<Cmd>NvimTreeFocus<CR>')
 
+-- Git
 vim.keymap.set('n', '<leader>gs', '<Cmd>vertical G<CR>')
+vim.keymap.set('n', '<leader>gp', '<Cmd>G push<CR>')
+vim.keymap.set('n', '<leader>gl', '<Cmd>G pull<CR>')
+vim.keymap.set('n', '<leader>gcm', '<Cmd>G checkout main<CR>')
+vim.keymap.set('n', '<leader>gcd', '<Cmd>G checkout development<CR>')
 
 -- ZenMode
 vim.keymap.set('n', '<leader>zm', '<Cmd>ZenMode<CR>')
