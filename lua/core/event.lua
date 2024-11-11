@@ -35,9 +35,7 @@ local definitions = {
     {
       'TextYankPost',
       {
-        callback = function()
-          vim.highlight.on_yank { higroup = 'Visual' }
-        end,
+        callback = function() vim.highlight.on_yank { higroup = 'Visual' } end,
       },
     },
   },

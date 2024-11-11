@@ -1,6 +1,6 @@
 return {
   mapleader = ' ',
   maplocalleader = ' ',
-  colorscheme = 'tokyonight-night',
+  colorscheme = 'tokyonight',
   statusline = { preset = 'blocks' },
 }

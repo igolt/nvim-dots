@@ -3,7 +3,7 @@ local telescope = require('telescope')
 local function vimdots()
   require('telescope.builtin').find_files {
     prompt_title = 'VimDots',
-    cwd = USER_CONFIG_PATH,
+    cwd = vim.fn.stdpath('config'),
   }
 end
 

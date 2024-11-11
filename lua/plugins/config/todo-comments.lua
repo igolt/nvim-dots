@@ -13,5 +13,3 @@ require('todo-comments').setup {
 
   search = { pattern = [[\b(KEYWORDS)(\(\S+\))?:]] },
 }
-
-vim.cmd([[nnoremap <leader>to <cmd>TodoTelescope<cr>]])

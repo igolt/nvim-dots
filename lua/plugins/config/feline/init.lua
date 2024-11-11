@@ -1,4 +1,4 @@
-local stlineconfig = require('user.config').statusline
+local stlineconfig = require('config').statusline
 
 if not stlineconfig or not stlineconfig.preset then
   require('feline').setup()
@@ -19,7 +19,7 @@ if ok then
   end
 else
   Warn(
-    ('Could not load `%s` status line preset\nFallbacking to default'):format(
+    ('Could not load status line preset %q\nFallbacking to default'):format(
       preset
     )
   )

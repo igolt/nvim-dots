@@ -79,7 +79,6 @@ local active_right = {
     left_sep = ' ',
   },
   with_sep { provider = 'scroll_bar', hl = { fg = 'orange' } },
-  {},
 }
 
 local inactive_left = {

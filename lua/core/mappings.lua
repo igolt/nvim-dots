@@ -1,107 +1,103 @@
-local set_keymap = require('lib.keymap').set_keymap
-
-local mapleader = require('user.config').mapleader or ' '
-local maplocalleader = require('user.config').maplocalleader or ' '
+local mapleader = require('config').mapleader or ' '
+local maplocalleader = require('config').maplocalleader or ' '
+local noremap = { noremap = true }
 
 vim.g.mapleader = mapleader
 vim.g.maplocalleader = maplocalleader
 
-local noremap = { noremap = true }
-
-set_keymap('', mapleader, '<Nop>')
-set_keymap('', maplocalleader, '<Nop>')
-
 -- Disable 'Switch to Ex mode' mapping
-set_keymap('n', 'Q', '<Nop>')
+vim.keymap.set('n', 'Q', '<Nop>')
 
 -- Map CTRL-[ to ESC
-set_keymap('n', '<C-[>', '<Esc>', { remap = true })
+vim.keymap.set('n', '<C-[>', '<Esc>', { remap = true })
 
 -- Disable highlight search
-set_keymap('n', '<Esc>', '<Cmd>noh<Cr>')
+vim.keymap.set('n', '<Esc>', '<Cmd>noh<CR>')
 
 -- Open URL under cursor
-set_keymap('n', 'gx', '<cmd>VisitLinkUnderCursor<cr>')
+vim.keymap.set('n', 'gx', '<Cmd>VisitLinkUnderCursor<CR>')
 
 --  Window navigation
-set_keymap('n', '<C-h>', ':wincmd h<cr>')
-set_keymap('n', '<C-j>', ':wincmd j<cr>')
-set_keymap('n', '<C-k>', ':wincmd k<cr>')
-set_keymap('n', '<C-l>', ':wincmd l<cr>')
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-set_keymap('n', '<leader>e', ':e<Space>', noremap)
-set_keymap('n', '<leader>v', ':vsplit<Space>', noremap)
+vim.keymap.set('n', '<leader>e', ':e<Space>', noremap)
+vim.keymap.set('n', '<leader>v', ':vsplit<Space>', noremap)
 
-set_keymap('n', '<leader>w', '<cmd>silent w<cr>')
-set_keymap('n', '<leader>q', '<cmd>q<cr>')
-set_keymap('n', '<leader>fq', '<cmd>qa<cr>')
-set_keymap('n', 'du', '0D')
+vim.keymap.set('n', '<leader>w', '<Cmd>silent w<CR>')
+vim.keymap.set('n', '<leader>q', '<Cmd>q<CR>')
+vim.keymap.set('n', '<leader>fq', '<Cmd>qa<CR>')
+vim.keymap.set('n', 'du', '0D')
 
-set_keymap('', '<leader>s', ':s/', noremap)
-set_keymap('n', '<leader>S', ':%s/', noremap)
+vim.keymap.set('', '<leader>s', ':s/', noremap)
+vim.keymap.set('n', '<leader>S', ':%s/', noremap)
 
 -- Indent the whole file
-set_keymap('n', '=f', 'gg=G')
+vim.keymap.set('n', '=f', 'gg=G')
 
 -- Quick fix mappings
-set_keymap('n', '<leader>co', '<cmd>copen<cr>')
-set_keymap('n', '<leader>cc', '<cmd>cclose<cr>')
-set_keymap('n', '<leader>cn', '<cmd>cnext<cr>')
-set_keymap('n', '<leader>cp', '<cmd>cprevious<cr>')
+vim.keymap.set('n', '<leader>co', '<Cmd>copen<CR>')
+vim.keymap.set('n', '<leader>cc', '<Cmd>cclose<CR>')
+vim.keymap.set('n', '<leader>cn', '<Cmd>cnext<CR>')
+vim.keymap.set('n', '<leader>cp', '<Cmd>cprevious<CR>')
 
 -- Select pasted text
-set_keymap('n', 'gp', '`[v`]')
+vim.keymap.set('n', 'gp', '`[v`]')
 
 -- Stay in indent mode
-set_keymap('v', '>', '>gv')
-set_keymap('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
 
 -- Moving lines
-set_keymap('n', '<A-j>', ':move .+1<CR>==')
-set_keymap('n', '<A-k>', ':move .-2<CR>==')
+vim.keymap.set('n', '<A-j>', '<Cmd>move .+1<CR>==')
+vim.keymap.set('n', '<A-k>', '<Cmd>move .-2<CR>==')
 
-set_keymap('v', '<A-k>', ':m .+1<CR>==')
-set_keymap('v', '<A-k>', ':m .-2<CR>==')
+vim.keymap.set('v', '<A-k>', '<Cmd>m .+1<CR>==')
+vim.keymap.set('v', '<A-k>', '<Cmd>m .-2<CR>==')
 
-set_keymap('x', '<A-j>', ":move '>+1<CR>gv-gv")
-set_keymap('x', '<A-k>', ":move '<-2<CR>gv-gv")
+vim.keymap.set('x', '<A-j>', "<Cmd>move '>+1<CR>gv-gv")
+vim.keymap.set('x', '<A-k>', "<Cmd>move '<-2<CR>gv-gv")
 
-set_keymap('x', 'p', '"_dP')
+vim.keymap.set('x', 'p', '"_dP')
 
 -- Sort lines based on their length
-set_keymap(
+vim.keymap.set(
   'x',
   '<leader><leader>sl',
-  [[:!awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<cr>]]
+  [[<Cmd>!awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<CR>]],
+  { silent = true }
 )
 
 -- Better terminal navigation
-set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h')
-set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j')
-set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k')
-set_keymap('t', '<s-C-l>', '<C-\\><C-n><C-w>l')
+vim.keymap.set('t', '<C-h>', '<C-\\><C-n><C-w>h')
+vim.keymap.set('t', '<C-j>', '<C-\\><C-n><C-w>j')
+vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
+vim.keymap.set('t', '<s-C-l>', '<C-\\><C-n><C-w>l')
 
 -- Telescope mappings
-set_keymap('n', '<C-p>', '<cmd>Telescope find_files<cr>')
-set_keymap('n', '<leader>td', '<cmd>Telescope vimdots<cr>')
-set_keymap('n', '<leader>tl', '<cmd>Telescope live_grep<cr>')
+vim.keymap.set('n', '<C-p>', '<Cmd>Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>td', '<Cmd>Telescope vimdots<CR>')
+vim.keymap.set('n', '<leader>tl', '<Cmd>Telescope live_grep<CR>')
+vim.keymap.set('n', '<leader>to', '<Cmd>TodoTelescope<CR>')
 
 -- Buffers
-set_keymap('n', '<Tab>', ':bnext<cr>')
-set_keymap('n', '<S-Tab>', ':bprevious<cr>')
-set_keymap('n', '<leader>x', '<cmd>bdelete<cr>')
-set_keymap('n', '<leader>X', '<cmd>BufOnly<cr>')
-set_keymap('n', '<leader>b', '<cmd>Telescope buffers<cr>')
+vim.keymap.set('n', '<Tab>', '<Cmd>bnext<CR>')
+vim.keymap.set('n', '<S-Tab>', '<Cmd>bprevious<CR>')
+vim.keymap.set('n', '<leader>x', '<Cmd>bdelete<CR>')
+vim.keymap.set('n', '<leader>X', '<Cmd>BufOnly<CR>')
+vim.keymap.set('n', '<leader>b', '<Cmd>Telescope buffers<CR>')
 
 -- NvimTree
-set_keymap('n', '<C-n>', '<cmd>NvimTreeToggle<cr>')
-set_keymap('n', '\\', '<cmd>NvimTreeFocus<cr>')
+vim.keymap.set('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>')
+vim.keymap.set('n', '\\', '<Cmd>NvimTreeFocus<CR>')
 
-set_keymap('n', '<leader>gs', '<cmd>vertical G<cr>')
+vim.keymap.set('n', '<leader>gs', '<Cmd>vertical G<CR>')
 
 -- ZenMode
-set_keymap('n', '<leader>zm', '<cmd>ZenMode<cr>')
+vim.keymap.set('n', '<leader>zm', '<Cmd>ZenMode<CR>')
 
--- Packer
-set_keymap('n', '<leader>ps', '<cmd>PackerSync<cr>')
-set_keymap('n', '<leader>pc', '<cmd>PackerCompile<cr>')
+-- EasyAlign
+vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
+vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
