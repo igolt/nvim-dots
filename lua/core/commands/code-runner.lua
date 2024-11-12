@@ -2,11 +2,10 @@ local Terminal = require('toggleterm.terminal').Terminal
 
 ---@param cmd string
 local code_runner = function(cmd)
-  local filepath = ('%q'):format(vim.api.nvim_buf_get_name(0))
   return function()
+    local filepath = ('%q'):format(vim.api.nvim_buf_get_name(0))
     local term = Terminal:new {
-      cmd = 'clear; '
-        .. cmd
+      cmd = cmd
         .. ' '
         .. filepath
         .. '; printf "\\nPress enter..."; read -r; exit',
