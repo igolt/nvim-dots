@@ -55,7 +55,10 @@ return {
   { 'folke/todo-comments.nvim', config = pconfig('todo-comments') },
 
   -- UI
-  { 'stevearc/dressing.nvim', opts = {} },
+  {
+    'stevearc/dressing.nvim',
+    opts = { input = { mappings = { n = { ['ZZ'] = 'Confirm' } } } },
+  },
   {
     'rcarriga/nvim-notify',
     config = function() vim.notify = require('notify') end,
