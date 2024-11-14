@@ -95,8 +95,8 @@ vim.keymap.set('n', '\\', '<Cmd>NvimTreeFocus<CR>')
 
 -- Git
 vim.keymap.set('n', '<leader>gs', '<Cmd>vertical G<CR>')
-vim.keymap.set('n', '<leader>gp', '<Cmd>G push<CR>')
-vim.keymap.set('n', '<leader>gl', '<Cmd>G pull<CR>')
+vim.keymap.set('n', '<leader>gp', '<Cmd>GitPush<CR>')
+vim.keymap.set('n', '<leader>gl', '<Cmd>GitPull<CR>')
 vim.keymap.set('n', '<leader>gm', ':G merge<Space>')
 vim.keymap.set('n', '<leader>gco', ':G checkout<Space>')
 vim.keymap.set('n', '<leader>gcm', '<Cmd>G checkout main<CR>')
