@@ -1,9 +1,9 @@
+local command = vim.api.nvim_create_user_command
+
 local code_runner = require('core.commands.code-runner')
 local pyright = require('core.commands.pyright')
+local ruff = require('core.commands.ruff')
 
-vim.api.nvim_create_user_command('RunCode', code_runner.run, {})
-vim.api.nvim_create_user_command(
-  'PyrightQuickfix',
-  pyright.diagnostics_to_qf_list,
-  {}
-)
+command('RunCode', code_runner.run, {})
+command('PyrightQuickfix', pyright.diagnostics_to_qflist, {})
+command('RuffQuickfix', ruff.diagnostics_to_qflist, {})

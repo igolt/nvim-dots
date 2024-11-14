@@ -10,7 +10,7 @@ local function notify(msg, level, opts)
 end
 
 ---@param path string?
-M.diagnostics_to_qf_list = function(path)
+M.diagnostics_to_qflist = function(path)
   vim.system({ 'pyright', '--outputjson', path }, { text = true }, function(out)
     if out.code > 1 or out.signal ~= 0 then
       local msg = 'Failed to execute Pyright'
