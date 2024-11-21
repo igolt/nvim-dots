@@ -120,7 +120,7 @@ require('nvim-tree').setup {
   update_cwd = true,
   diagnostics = { enable = true },
   update_focused_file = { enable = true },
-  filters = { custom = { '^\\.git' } },
+  filters = { custom = { '^\\.git$' } },
   actions = { open_file = { resize_window = true } },
 
   notify = {
