@@ -58,6 +58,7 @@ local function set_lsp_keymaps_for_buf(bufnr)
   buf_set_keymap('n', ']d', vim.diagnostic.goto_next)
 end
 
+---@param _ vim.lsp.Client
 ---@param bufnr integer
 M.on_attach = function(_, bufnr) set_lsp_keymaps_for_buf(bufnr) end
 
