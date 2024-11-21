@@ -25,11 +25,10 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'ruff', 'ruff_format' },
+        ['_'] = { 'trim_whitespace' },
       },
 
-      format_after_save = {
-        lsp_format = 'fallback',
-      },
+      format_after_save = true,
     },
   },
   -- Completion
