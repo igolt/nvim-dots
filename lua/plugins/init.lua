@@ -76,10 +76,6 @@ return {
   { 'feline-nvim/feline.nvim', config = pconfig('feline') },
 
   { 'kyazdani42/nvim-tree.lua', config = pconfig('nvim-tree') },
-  {
-    'uga-rosa/ccc.nvim',
-    opts = { highlighter = { auto_enable = true, lsp = true } },
-  },
   { 'akinsho/nvim-bufferline.lua', config = pconfig('bufferline') },
 
   -- Editor plugins
