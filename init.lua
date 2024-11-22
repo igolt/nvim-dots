@@ -35,6 +35,13 @@ try_load('core.event')
 try_load('core.plugins')
 try_load('core.commands')
 
+vim.filetype.add {
+  pattern = {
+    ['requirements%..*%.txt'] = 'requirements',
+    ['requirements%..*%.in'] = 'requirements',
+  },
+}
+
 local colorscheme = require('config').colorscheme or 'default'
 local ok, err = pcall(vim.cmd.colorscheme, colorscheme)
 if not ok then
