@@ -90,7 +90,7 @@ return {
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
-    opts = { scope = { enabled = false } },
+    opts = { scope = { enabled = false }, indent = { tab_char = '▎' } },
   },
 
   { 'feline-nvim/feline.nvim', config = pconfig('feline') },
