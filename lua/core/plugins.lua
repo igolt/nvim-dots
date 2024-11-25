@@ -1,6 +1,6 @@
 local config = require('config')
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   local out = vim.fn.system {
     'git',
     'clone',

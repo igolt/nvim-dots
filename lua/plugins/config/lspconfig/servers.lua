@@ -22,8 +22,9 @@ local servers = {
         },
         workspace = {
           library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.stdpath('config') .. '/lua'] = true,
+            vim.fn.expand('$VIMRUNTIME/lua'),
+            vim.fn.stdpath('config') .. '/lua',
+            '${3rd}/luv/library',
           },
         },
       },
@@ -35,9 +36,7 @@ local servers = {
   jsonls = {},
   ruff = {
     ---@param client vim.lsp.Client
-    on_attach = function(client)
-      client.server_capabilities.hoverProvider = false
-    end,
+    on_attach = function(client) client.server_capabilities.hoverProvider = false end,
   },
   pyright = {
     settings = {
