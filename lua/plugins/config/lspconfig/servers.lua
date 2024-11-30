@@ -52,7 +52,36 @@ local servers = {
     },
   },
   rust_analyzer = {},
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+      },
+    },
+    on_attach = function(client, buffer)
+      default_on_attach(client, buffer)
+
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = buffer,
+        callback = function()
+          local params = vim.lsp.util.make_range_params()
+          params.context = { only = { 'source.organizeImports' } }
+          local result =
+            client.request_sync('textDocument/codeAction', params, 1000, buffer)
+          for _, r in pairs(result or {}) do
+            if r.edit then
+              vim.lsp.utils.apply_workspace_edit(r.edit, client.offset_encoding)
+            end
+          end
+          vim.lsp.buf.format { async = false }
+        end,
+      })
+    end,
+  },
   volar = {
     on_new_config = function(new_config, new_root_dir)
       new_config.init_options.typescript.tsdk =
