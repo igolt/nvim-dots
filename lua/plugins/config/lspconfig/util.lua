@@ -11,7 +11,7 @@ M.get_typescript_server_path = function(root_dir)
   ---@param path string
   local function check_dir(path)
     found_ts = util.path.join(path, 'node_modules', 'typescript', 'lib')
-    return util.path.exists(found_ts) and path or nil
+    return vim.uv.fs_stat(found_ts) and path or nil
   end
   return util.search_ancestors(root_dir, check_dir) and found_ts or global_ts
 end
