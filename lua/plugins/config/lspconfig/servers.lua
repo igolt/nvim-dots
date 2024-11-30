@@ -4,6 +4,7 @@ local default_capabilities =
   require('plugins.config.lspconfig.handlers').capabilities
 local util = require('plugins.config.lspconfig.util')
 
+---@type table<string, lspconfig.Config>
 local servers = {
   clangd = {
     cmd = {
@@ -24,6 +25,7 @@ local servers = {
           library = {
             vim.fn.expand('$VIMRUNTIME/lua'),
             vim.fn.stdpath('config') .. '/lua',
+            vim.fn.stdpath('data') .. '/lazy/nvim-lspconfig/lua',
             '${3rd}/luv/library',
           },
         },
@@ -35,7 +37,6 @@ local servers = {
   vimls = {},
   jsonls = {},
   ruff = {
-    ---@param client vim.lsp.Client
     on_attach = function(client) client.server_capabilities.hoverProvider = false end,
   },
   pyright = {
@@ -53,8 +54,6 @@ local servers = {
   rust_analyzer = {},
   gopls = {},
   volar = {
-    ---@param new_config vim.lsp.ClientConfig
-    ---@param new_root_dir string
     on_new_config = function(new_config, new_root_dir)
       new_config.init_options.typescript.tsdk =
         util.get_typescript_server_path(new_root_dir)
