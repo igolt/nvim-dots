@@ -23,6 +23,7 @@ return {
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
+        cpp = { lsp_format = 'fallback' },
         lua = { 'stylua' },
         python = { 'ruff', 'ruff_format' },
         ['_'] = { 'trim_whitespace' },
