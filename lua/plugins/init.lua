@@ -3,6 +3,7 @@ local function pconfig(plugin)
   return function() require('plugins.config.' .. plugin) end
 end
 
+---@type LazySpec
 return {
   'nvim-lua/plenary.nvim',
   'nvim-lua/popup.nvim',
@@ -33,15 +34,19 @@ return {
     },
   },
   -- Completion
-  'hrsh7th/cmp-calc',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-vsnip',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-nvim-lsp',
-  -- Snippets
-  { 'hrsh7th/vim-vsnip', config = pconfig('vsnip') },
-
-  { 'hrsh7th/nvim-cmp', config = pconfig('completion') },
+  {
+    'hrsh7th/nvim-cmp',
+    config = pconfig('completion'),
+    dependencies = {
+      'hrsh7th/cmp-calc',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      -- Snippets
+      { 'hrsh7th/vim-vsnip', config = pconfig('vsnip') },
+    },
+  },
 
   -- Fuzzy finder
   {
