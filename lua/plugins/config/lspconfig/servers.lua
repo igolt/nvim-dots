@@ -25,6 +25,7 @@ local servers = {
           library = {
             vim.fn.expand('$VIMRUNTIME/lua'),
             vim.fn.stdpath('config') .. '/lua',
+            vim.fn.stdpath('data') .. '/lazy/lazy.nvim/lua',
             vim.fn.stdpath('data') .. '/lazy/nvim-lspconfig/lua',
             '${3rd}/luv/library',
           },
