@@ -66,7 +66,7 @@ vim.keymap.set('x', 'p', '"_dP')
 vim.keymap.set(
   'x',
   '<leader><leader>sl',
-  [[<Cmd>!awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<CR>]],
+  [[:!awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<CR>]],
   { silent = true }
 )
 
