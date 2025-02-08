@@ -6,6 +6,7 @@ local util = require('plugins.config.lspconfig.util')
 
 ---@type table<string, lspconfig.Config>
 local servers = {
+  bashls = {},
   clangd = {
     cmd = {
       'clangd',
