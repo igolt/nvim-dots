@@ -10,10 +10,15 @@ local function notify(msg, level, opts)
 end
 
 M.diagnostics_to_qflist = function()
+  local timer_handle = vim.defer_fn(
+    function() notify('Running Ruff...') end,
+    100
+  )
   vim.system(
     { 'ruff', 'check', '--output-format', 'json' },
     { text = true },
     function(out)
+      vim.uv.timer_stop(timer_handle)
       if out.code ~= 1 then
         local msg = out.code == 0 and 'No error found' or 'Failed to run Ruff'
         local level = out.code == 0 and vim.log.levels.INFO

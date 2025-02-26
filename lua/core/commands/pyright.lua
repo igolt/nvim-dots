@@ -11,7 +11,13 @@ end
 
 ---@param path string?
 M.diagnostics_to_qflist = function(path)
+  local timer_handle = vim.defer_fn(
+    function() notify('Running Pyright...') end,
+    100
+  )
+
   vim.system({ 'pyright', '--outputjson', path }, { text = true }, function(out)
+    vim.uv.timer_stop(timer_handle)
     if out.code > 1 or out.signal ~= 0 then
       local msg = 'Failed to execute Pyright'
       if out.stderr then
