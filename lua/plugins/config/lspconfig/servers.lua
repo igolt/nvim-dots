@@ -46,9 +46,11 @@ local servers = {
       python = {
         analysis = {
           autoSearchPaths = true,
-          diagnosticMode = 'openFilesOnly',
+          diagnosticMode = 'workspace',
           useLibraryCodeForTypes = true,
           typeCheckingMode = 'basic',
+          reportPossiblyUnboundVariable = 'error',
+          reportUnboundVariable = 'error',
         },
       },
     },

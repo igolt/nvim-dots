@@ -27,6 +27,8 @@ return {
         cpp = { lsp_format = 'fallback' },
         lua = { 'stylua' },
         python = { 'ruff', 'ruff_format' },
+        javascript = { 'prettierd' },
+        vue = { 'prettierd' },
         ['_'] = { 'trim_whitespace' },
       },
 
@@ -84,6 +86,7 @@ return {
   { 'akinsho/nvim-bufferline.lua', config = pconfig('bufferline') },
 
   -- Editor plugins
+  { 'nmac427/guess-indent.nvim', opts = {} },
   'godlygeek/tabular',
   { 'junegunn/vim-easy-align' },
 
