@@ -5,6 +5,8 @@ local noremap = { noremap = true }
 vim.g.mapleader = mapleader
 vim.g.maplocalleader = maplocalleader
 
+vim.keymap.set('i', '<C-l>', '<C-o>A')
+
 -- Disable 'Switch to Ex mode' mapping
 vim.keymap.set('n', 'Q', '<Nop>')
 
