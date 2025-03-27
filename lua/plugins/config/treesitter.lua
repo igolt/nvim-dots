@@ -2,6 +2,7 @@ require('nvim-treesitter.configs').setup {
   playground = { enable = true },
   ensure_installed = {
     'gitcommit',
+    'go',
     'c',
     'cpp',
     'html',
