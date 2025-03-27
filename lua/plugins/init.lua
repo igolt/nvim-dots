@@ -107,11 +107,6 @@ return {
     opts = {},
   },
 
-  {
-    'andymass/vim-matchup',
-    init = function() vim.g.matchup_matchparen_offscreen = { method = 'popup' } end,
-  },
-
   -- Git
   'tpope/vim-fugitive',
   { 'lewis6991/gitsigns.nvim', config = pconfig('gitsigns') },
