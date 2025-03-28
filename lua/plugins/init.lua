@@ -28,6 +28,8 @@ return {
         lua = { 'stylua' },
         python = { 'ruff', 'ruff_format' },
         javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
+        prisma = { lsp_format = 'fallback' },
         vue = { 'prettierd' },
         ['_'] = { 'trim_whitespace' },
       },

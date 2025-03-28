@@ -7,6 +7,7 @@ require('nvim-treesitter.configs').setup {
     'cpp',
     'html',
     'javascript',
+    'prisma',
     'lua',
     'php',
     'python',
