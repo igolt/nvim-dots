@@ -104,6 +104,10 @@ return {
   'gpanders/editorconfig.nvim',
 
   {
+    'andymass/vim-matchup',
+    init = function() vim.g.matchup_matchparen_offscreen = { method = 'popup' } end,
+  },
+  {
     'xiyaowong/link-visitor.nvim',
     opts = {},
   },
