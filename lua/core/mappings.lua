@@ -5,6 +5,7 @@ local noremap = { noremap = true }
 vim.g.mapleader = mapleader
 vim.g.maplocalleader = maplocalleader
 
+-- Jump to the end of the line in insert mode
 vim.keymap.set('i', '<C-l>', '<C-o>A')
 
 -- Disable 'Switch to Ex mode' mapping
@@ -62,6 +63,7 @@ vim.keymap.set('v', '<A-k>', '<Cmd>m .-2<CR>==')
 vim.keymap.set('x', '<A-j>', "<Cmd>move '>+1<CR>gv-gv")
 vim.keymap.set('x', '<A-k>', "<Cmd>move '<-2<CR>gv-gv")
 
+-- Don't replace register content when pasting
 vim.keymap.set('x', 'p', '"_dP')
 
 -- Sort lines based on their length
@@ -104,9 +106,16 @@ vim.keymap.set('n', '<leader>gco', ':G checkout<Space>')
 vim.keymap.set('n', '<leader>gcm', '<Cmd>G checkout main<CR>')
 vim.keymap.set('n', '<leader>gcd', '<Cmd>G checkout development<CR>')
 
--- ZenMode
-vim.keymap.set('n', '<leader>zm', '<Cmd>ZenMode<CR>')
-
 -- EasyAlign
 vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
+
+-- unset LSP default mappings (nvim>=0.11)
+if vim.fn.has('nvim-0.11') == 1 then
+  vim.keymap.del('n', 'grr')
+  vim.keymap.del({ 'n', 'v' }, 'gra')
+  vim.keymap.del('n', 'grn')
+  vim.keymap.del('n', 'gri')
+  vim.keymap.del('n', 'gO')
+  vim.keymap.del('i', '<C-s>')
+end

@@ -50,13 +50,3 @@ if not ok then
     vim.log.levels.WARN
   )
 end
-
--- unset LSP default mappings (nvim>=0.11)
-if vim.fn.has('nvim-0.11') == 1 then
-  vim.keymap.del('n', 'grr')
-  vim.keymap.del({ 'n', 'v' }, 'gra')
-  vim.keymap.del('n', 'grn')
-  vim.keymap.del('n', 'gri')
-  vim.keymap.del('n', 'gO')
-  vim.keymap.del('i', '<C-s>')
-end
