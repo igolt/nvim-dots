@@ -6,10 +6,10 @@ require('todo-comments').setup {
   },
   merge_keywords = true,
 
-  highlight = {
-    keyword = 'bg',
-    pattern = [[.*<(KEYWORDS)(\(\S+\))?:]],
-  },
+  -- highlight = {
+  --   keyword = 'bg',
+  --   pattern = [[.*<(KEYWORDS)(\(\S+\))?:]],
+  -- },
 
   search = { pattern = [[\b(KEYWORDS)(\(\S+\))?:]] },
 }
