@@ -50,7 +50,7 @@ local function set_lsp_keymaps_for_buf(bufnr)
   buf_set_keymap(
     'n',
     '[d',
-    function() vim.diagnostic.jump { count = 1, float = true } end
+    function() vim.diagnostic.jump { count = -1, float = true } end
   )
   buf_set_keymap(
     'n',
