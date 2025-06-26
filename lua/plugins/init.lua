@@ -109,6 +109,7 @@ return {
 
   -- colorschemes
   'folke/tokyonight.nvim',
+  'sainnhe/gruvbox-material',
 
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -133,6 +134,22 @@ return {
   'tpope/vim-repeat',
   'tpope/vim-surround',
   'gpanders/editorconfig.nvim',
+  {
+    'roobert/f-string-toggle.nvim',
+    keys = {
+      {
+        '<C-f>',
+        function() require('f-string-toggle').toggle_fstring() end,
+        mode = { 'n', 'i' },
+        desc = 'Toggle f-string',
+      },
+    },
+    config = function()
+      require('f-string-toggle').setup {
+        key_binding = false,
+      }
+    end,
+  },
 
   {
     'andymass/vim-matchup',
