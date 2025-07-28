@@ -37,6 +37,12 @@ try_load('core.commands')
 
 vim.filetype.add {
   pattern = {
+    ['.env%.example'] = 'sh',
+    ['.env%.template'] = 'sh',
+    ['docker-compose%.yaml'] = 'yaml.docker-compose',
+    ['docker-compose%.yml'] = 'yaml.docker-compose',
+    ['compose%.yml'] = 'yaml.docker-compose',
+    ['compose%.yaml'] = 'yaml.docker-compose',
     ['requirements%..*%.txt'] = 'requirements',
     ['requirements%..*%.in'] = 'requirements',
   },
