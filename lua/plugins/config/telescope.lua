@@ -21,6 +21,7 @@ telescope.setup {
       '--hidden',
       '--glob=!.git/',
     },
+    file_ignore_patterns = { '^.git/' },
     prompt_prefix = '   ',
     selection_caret = '  ',
     layout_strategy = 'horizontal',

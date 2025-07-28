@@ -81,7 +81,11 @@ vim.keymap.set('t', '<C-k>', '<C-\\><C-n><C-w>k')
 vim.keymap.set('t', '<s-C-l>', '<C-\\><C-n><C-w>l')
 
 -- Telescope mappings
-vim.keymap.set('n', '<C-p>', '<Cmd>Telescope find_files<CR>')
+vim.keymap.set(
+  'n',
+  '<C-p>',
+  '<Cmd>lua require("telescope.builtin").find_files({hidden=true})<CR>'
+)
 vim.keymap.set('n', '<leader>td', '<Cmd>Telescope vimdots<CR>')
 vim.keymap.set('n', '<leader>tl', '<Cmd>Telescope live_grep<CR>')
 vim.keymap.set('n', '<leader>to', '<Cmd>TodoTelescope<CR>')
