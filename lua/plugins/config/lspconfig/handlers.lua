@@ -26,7 +26,7 @@ M.setup = function()
 end
 
 ---@param bufnr integer
-local function set_lsp_keymaps_for_buf(bufnr)
+M.set_lsp_keymaps_for_buf = function(bufnr)
   local function buf_set_keymap(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr })
   end
@@ -58,10 +58,6 @@ local function set_lsp_keymaps_for_buf(bufnr)
     function() vim.diagnostic.jump { count = 1, float = true } end
   )
 end
-
----@param _ vim.lsp.Client
----@param bufnr integer
-M.on_attach = function(_, bufnr) set_lsp_keymaps_for_buf(bufnr) end
 
 local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 ---@type lsp.ClientCapabilities?
