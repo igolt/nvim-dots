@@ -27,6 +27,7 @@ return {
         cpp = { lsp_format = 'fallback' },
         lua = { 'stylua' },
         python = { 'ruff', 'ruff_format' },
+        html = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
         prisma = { lsp_format = 'fallback' },
