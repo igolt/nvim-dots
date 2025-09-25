@@ -34,6 +34,7 @@ return {
         vue = { 'prettierd' },
         go = { 'gofumpt', 'goimports', 'golines' },
         ['_'] = { 'trim_whitespace' },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
       },
 
       format_after_save = true,
