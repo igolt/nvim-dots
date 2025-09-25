@@ -44,9 +44,9 @@ vim.lsp.config('ruff', {
   on_attach = function(client) client.server_capabilities.hoverProvider = false end,
 })
 
-vim.lsp.config('pyright', {
+vim.lsp.config('basedpyright', {
   settings = {
-    python = {
+    basedpyright = {
       analysis = {
         autoSearchPaths = true,
         diagnosticMode = 'workspace',
@@ -102,7 +102,7 @@ vim.lsp.enable {
   'vimls',
   'jsonls',
   'ruff',
-  'pyright',
+  'basedpyright',
   'rust_analyzer',
   'gopls',
   'vue_ls',
