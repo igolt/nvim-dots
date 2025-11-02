@@ -166,7 +166,7 @@ return {
   -- Git
   'tpope/vim-fugitive',
   { 'lewis6991/gitsigns.nvim', config = pconfig('gitsigns') },
-  { 'f-person/git-blame.nvim', opts = { enabled = true } },
+  { 'f-person/git-blame.nvim', opts = { enabled = false } },
 
   {
     'iamcco/markdown-preview.nvim',

@@ -109,6 +109,7 @@ vim.keymap.set('n', '<leader>gm', ':G merge<Space>')
 vim.keymap.set('n', '<leader>gco', ':G checkout<Space>')
 vim.keymap.set('n', '<leader>gcm', '<Cmd>G checkout main<CR>')
 vim.keymap.set('n', '<leader>gcd', '<Cmd>G checkout development<CR>')
+vim.keymap.set('n', 'gb', '<Cmd>GitBlameToggle<CR>')
 
 -- EasyAlign
 vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
