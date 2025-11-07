@@ -16,7 +16,7 @@ local function get_python_command()
   return pythoncmd
 end
 
-dap.adapters.python = function(cb, config)
+dap.adapters.debugpy = function(cb, config)
   if config.request == 'attach' then
     local connect = (config.connect or config)
     local port = connect.port
@@ -44,7 +44,9 @@ dap.adapters.python = function(cb, config)
   end
 end
 
-dap.configurations.python = {
+dap.adapters.python = dap.adapters.debugpy
+
+dap.configurations.debugpy = {
   {
     type = 'python',
     request = 'launch',
@@ -54,3 +56,5 @@ dap.configurations.python = {
     pythonPath = get_python_command,
   },
 }
+
+dap.configurations.python = dap.configurations.debugpy
