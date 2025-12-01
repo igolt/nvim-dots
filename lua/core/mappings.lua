@@ -115,6 +115,11 @@ vim.keymap.set('n', 'gb', '<Cmd>GitBlameToggle<CR>')
 vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
 
+-- Dap
+vim.keymap.set('n', '<leader><leader>b', '<Cmd>DapToggleBreakpoint<CR>')
+vim.keymap.set('n', '<leader><leader>r', '<Cmd>DapToggleRepl<CR>')
+vim.keymap.set('n', '<leader><leader>n', '<Cmd>DapNew<CR>')
+
 -- unset LSP default mappings (nvim>=0.11)
 if vim.fn.has('nvim-0.11') == 1 then
   vim.keymap.del('n', 'grr')
