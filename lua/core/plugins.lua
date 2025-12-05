@@ -1,5 +1,5 @@
 local config = require('config')
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = config.plugins.path .. '/lazy.nvim'
 
 if not vim.uv.fs_stat(lazypath) then
   local out = vim.fn.system {
