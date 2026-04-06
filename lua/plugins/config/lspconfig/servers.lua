@@ -83,11 +83,29 @@ vim.lsp.config('ts_ls', {
       {
         name = '@vue/typescript-plugin',
         location = config.npm.path .. 'lib/node_modules/@vue/typescript-plugin',
-        languages = { 'javascript', 'typescript', 'vue' },
+        languages = {
+          'javascript',
+          'javascript.jsx',
+          'javascriptreact',
+          'typescript',
+          'typescript',
+          'typescript.tsx',
+          'typescriptreact',
+          'vue',
+        },
       },
     },
   },
-  filetypes = { 'javascript', 'typescript', 'vue' },
+  filetypes = {
+    'javascript',
+    'javascript.jsx',
+    'javascriptreact',
+    'typescript',
+    'typescript',
+    'typescript.tsx',
+    'typescriptreact',
+    'vue',
+  },
 })
 
 vim.lsp.enable {
@@ -107,4 +125,6 @@ vim.lsp.enable {
   'gopls',
   'vue_ls',
   'ts_ls',
+  'jdtls',
+  'kotlin_lsp',
 }

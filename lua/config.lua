@@ -1,3 +1,7 @@
+vim.g.gruvbox_material_foreground = 'mix'
+vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_show_eob = 0
+
 return {
   mapleader = ' ',
   maplocalleader = ' ',

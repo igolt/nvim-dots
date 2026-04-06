@@ -18,22 +18,11 @@ vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_matchit = 1
 vim.g.loaded_matchparen = 1
 
----@param module string
-local function try_load(module)
-  local ok, err = pcall(require, module)
-  if not ok then
-    vim.notify(
-      ('Could not load module %q: %s'):format(module, err),
-      vim.log.levels.WARN
-    )
-  end
-end
-
-try_load('core.options')
-try_load('core.mappings')
-try_load('core.event')
-try_load('core.plugins')
-try_load('core.commands')
+require('core.options')
+require('core.mappings')
+require('core.event')
+require('core.plugins')
+require('core.commands')
 
 vim.filetype.add {
   pattern = {
