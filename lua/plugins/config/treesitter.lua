@@ -1,6 +1,7 @@
 local langs = {
   'gitcommit',
   'go',
+  'bash',
   'c',
   'cpp',
   'html',
