@@ -20,6 +20,10 @@ vim.keymap.set('n', 'gx', '<Cmd>VisitLinkUnderCursor<CR>')
 -- Code runner
 vim.keymap.set('n', '<leader>rc', '<Cmd>RunCode<CR>')
 
+--  Window resizing
+vim.keymap.set('n', '<C-,>', '2<C-w><')
+vim.keymap.set('n', '<C-.>', '2<C-w>>')
+
 --  Window navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
