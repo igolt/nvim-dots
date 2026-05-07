@@ -144,7 +144,30 @@ return {
   },
 
   -- Git
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    init = function()
+      vim.lsp.start = (function()
+        local old_lsp_start = vim.lsp.start
+        return function(...)
+          local opt = select(2, ...)
+          if opt and opt.bufnr then
+            if
+              not vim.api.nvim_buf_is_valid(opt.bufnr)
+              or vim.b[opt.bufnr].fugitive_type
+              or vim.startswith(
+                vim.api.nvim_buf_get_name(opt.bufnr),
+                'fugitive://'
+              )
+            then
+              return
+            end
+          end
+          old_lsp_start(...)
+        end
+      end)()
+    end,
+  },
   { 'lewis6991/gitsigns.nvim', config = pconfig('gitsigns') },
   { 'f-person/git-blame.nvim', opts = { enabled = false } },
 
