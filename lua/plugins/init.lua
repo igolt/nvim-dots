@@ -31,11 +31,13 @@ return {
         html = { 'prettierd' },
         javascript = { 'prettierd' },
         typescript = { 'prettierd' },
+        typescriptreact = { 'prettierd' },
         prisma = { lsp_format = 'fallback' },
         vue = { 'prettierd' },
         go = { 'gofumpt', 'goimports', 'golines' },
         ['_'] = { 'trim_whitespace' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
+        java = { lsp_format = 'fallback' },
       },
 
       format_after_save = true,
