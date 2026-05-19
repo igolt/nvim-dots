@@ -41,9 +41,6 @@ vim.keymap.set('n', 'du', '0D')
 vim.keymap.set('', '<leader>s', ':s/', noremap)
 vim.keymap.set('n', '<leader>S', ':%s/', noremap)
 
--- Indent the whole file
-vim.keymap.set('n', '=f', 'gg=G')
-
 -- Quick fix mappings
 vim.keymap.set('n', '<leader>co', '<Cmd>copen<CR>')
 vim.keymap.set('n', '<leader>cc', '<Cmd>cclose<CR>')
@@ -95,8 +92,8 @@ vim.keymap.set('n', '<leader>tl', '<Cmd>Telescope live_grep<CR>')
 vim.keymap.set('n', '<leader>to', '<Cmd>TodoTelescope<CR>')
 
 -- Buffers
-vim.keymap.set('n', '<Tab>', '<Cmd>bnext<CR>')
-vim.keymap.set('n', '<S-Tab>', '<Cmd>bprevious<CR>')
+vim.keymap.set('n', '<leader>bn', '<Cmd>bnext<CR>')
+vim.keymap.set('n', '<leader>bp', '<Cmd>bprevious<CR>')
 vim.keymap.set('n', '<leader>x', '<Cmd>bdelete<CR>')
 vim.keymap.set('n', '<leader>X', '<Cmd>BufOnly<CR>')
 vim.keymap.set('n', '<leader>b', '<Cmd>Telescope buffers<CR>')
@@ -105,7 +102,7 @@ vim.keymap.set('n', '<leader>b', '<Cmd>Telescope buffers<CR>')
 vim.keymap.set('n', '<C-n>', '<Cmd>NvimTreeToggle<CR>')
 vim.keymap.set('n', '\\', '<Cmd>NvimTreeFocus<CR>')
 
--- Git
+-- -- Git
 vim.keymap.set('n', '<leader>gs', '<Cmd>vertical G<CR>')
 vim.keymap.set('n', '<leader>gp', '<Cmd>GitPush<CR>')
 vim.keymap.set('n', '<leader>gl', '<Cmd>GitPull<CR>')
